@@ -1,0 +1,415 @@
+@{
+    ViewData["Title"] = "همم الحياة";
+    ViewData["Description"] = "شركة سعودية متخصصة في صناعة الفعاليات وتطوير البرامج والتجارب المتكاملة للجهات الحكومية والقطاع الخاص والمنظمات غير الربحية.";
+    ViewData["Active"] = "index";
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/user/index.css">
+    <link rel="stylesheet" href="~/css/user/splash.css">
+}
+
+<div id="himamSplash" class="splash-screen" role="presentation" aria-hidden="true">
+  <div class="splash-panel splash-panel--left"></div>
+  <div class="splash-panel splash-panel--right"></div>
+  <div class="splash-glow splash-glow--a"></div>
+  <div class="splash-glow splash-glow--b"></div>
+  <div class="splash-logo-wrap">
+    <img src="~/assets/logo-stacked-trim.png" alt="همم الحياة" class="splash-logo">
+  </div>
+</div>
+<script src="~/js/user/splash.js"></script>
+
+<section class="home-hero">
+  <div class="hero-video-layer" aria-hidden="true">
+    <iframe id="heroYtBg" class="hero-yt-bg"
+      src="https://www.youtube-nocookie.com/embed/c8bBHCEI9AE?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=c8bBHCEI9AE&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&playsinline=1&disablekb=1"
+      title="320 مليون زائر| قصة نجاح الترفيه في المملكة العربية السعودية"
+      frameborder="0" width="100%" height="100%"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin">
+    </iframe>
+    <div class="hero-overlay"></div>
+  </div>
+
+  <div class="container home-hero-inner">
+    <div class="eyebrow-1">صناعة الفعاليات وتطوير التجارب</div>
+    <h1>نصنع تجارب ترفيهية لأن جودة الحياة حق للجميع</h1>
+
+    <div class="hero-cta-row">
+      <a href="#sectors" class="btn btn-primary">استكشف خدماتنا
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      </a>
+    </div>
+  </div>
+
+</section>
+<section class="section-sm bg-ink" style="padding-block:0;">
+
+</section>
+
+<section class="bg-mist">
+  <div class="container">
+    <div class="about-teaser">
+      <div class="about-teaser-content reveal">
+        <div class="eyebrow">ما نقوم به</div>
+        <h2>تنطلق همم الحياة من همة تسعى إلى تحويل الأفكار والرسائل والأهداف إلى تجارب حقيقية ذات أثر ملموس</h2>
+        <p>نجمع بين التفكير الاستراتيجي والإبداع والتنفيذ المنضبط؛ لنقدم تجارب مترابطة تضع الإنسان في جوهرها، وتنتقل بالفكرة من التصور إلى واقع يُعاش ويُتذكر.</p>
+        <p>ولا تنتهي قيمة التجربة بانتهاء تنفيذها، بل تمتد إلى ما تحققه من نتائج، وما تتركه من أثر يمكن قياسه وتطويره والبناء عليه.</p>
+      </div>
+      <div class="about-teaser-media reveal">
+        <div class="chairman-frame">
+          <img src="~/assets/chairman-dhafer-alshahrani.png" alt="ظافر الشهراني - رئيس مجلس الإدارة">
+        </div>
+        <div class="chairman-tag">
+          <strong>ظافر الشهراني</strong>
+          <span>رئيس مجلس الإدارة</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section id="sectors">
+  <div class="container">
+    <div class="head-row reveal">
+      <h2>قطاعات الأعمال</h2>
+    </div>
+  </div>
+  <div class="container sectors-scroll-wrap">
+    <button type="button" class="sectors-arrow sectors-arrow--prev" data-dir="prev" aria-label="القطاعات السابقة">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 6l6 6-6 6"/></svg>
+    </button>
+    <div class="sectors-scroll reveal">
+
+      <div class="sector-card">
+        <div class="flip-inner">
+          <div class="flip-front">
+            <img class="sector-img" src="~/assets/sectors/s1.JPG" alt="الجهات الحكومية والهيئات" loading="lazy">
+            <div class="sector-front-overlay"></div>
+            <div class="sector-front-label">
+              <h3>الجهات الحكومية والهيئات</h3>
+            </div>
+          </div>
+          <div class="flip-back">
+            <h3>الجهات الحكومية والهيئات</h3>
+            <p>نطور المبادرات والفعاليات والبرامج والمشروعات التي تدعم الأهداف المؤسسية والمجتمعية وتخدم المستفيدين ضمن تجربة واضحة ومنظمة تراعي الحوكمة وتنوع الجمهور وقابلية قياس النتائج.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="sector-card">
+        <div class="flip-inner">
+          <div class="flip-front">
+            <img class="sector-img" src="~/assets/sectors/s2.jpg" alt="القطاع الخاص والعلامات التجارية" loading="lazy">
+            <div class="sector-front-overlay"></div>
+            <div class="sector-front-label">
+              <h3>القطاع الخاص والعلامات التجارية</h3>
+            </div>
+          </div>
+          <div class="flip-back">
+            <h3>القطاع الخاص والعلامات التجارية</h3>
+            <p>نصمم تجارب تساعد الشركات والعلامات التجارية على ترجمة أهدافها ورسائلها إلى تفاعل حقيقي مع العملاء والموظفين والشركاء.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="sector-card">
+        <div class="flip-inner">
+          <div class="flip-front">
+            <img class="sector-img" src="~/assets/sectors/s3.jpg" alt="القطاع غير الربحي" loading="lazy">
+            <div class="sector-front-overlay"></div>
+            <div class="sector-front-label">
+              <h3>القطاع غير الربحي</h3>
+            </div>
+          </div>
+          <div class="flip-back">
+            <h3>القطاع غير الربحي</h3>
+            <p>نساعد القطاعات غير الربحية على تحويل رسالتها وأهدافها المجتمعية إلى برامج ومبادرات وتجارب تصل للمستفيدين والداعمين والمتطوعين بوضوح، وتدعم المشاركة والاستفادة ضمن الموارد المتاحة.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="sector-card">
+        <div class="flip-inner">
+          <div class="flip-front">
+            <img class="sector-img" src="~/assets/sectors/s4.jpeg" alt="القطاع الترفيهي والثقافي" loading="lazy">
+            <div class="sector-front-overlay"></div>
+            <div class="sector-front-label">
+              <h3>القطاع الترفيهي والثقافي</h3>
+            </div>
+          </div>
+          <div class="flip-back">
+            <h3>القطاع الترفيهي والثقافي</h3>
+            <p>نطور فعاليات وتجارب تجمع بين المحتوى والإبداع والتفاعل، وتقدم للجمهور رحلة متماسكة تتناسب مع طبيعة المشروع وسياقه الثقافي والترفيهي.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="sector-card">
+        <div class="flip-inner">
+          <div class="flip-front">
+            <img class="sector-img" src="~/assets/sectors/s5.jpg" alt="القطاع السياحي والضيافة" loading="lazy">
+            <div class="sector-front-overlay"></div>
+            <div class="sector-front-label">
+              <h3>القطاع السياحي والضيافة</h3>
+            </div>
+          </div>
+          <div class="flip-back">
+            <h3>القطاع السياحي والضيافة</h3>
+            <p>نصمم تجارب الزوار والوجهات والبرامج السياحية بما يعزز وضوح الرحلة وجودة التفاعل، ويربط المكان بقصته وهويته وجمهوره المستهدف.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="sector-card">
+        <div class="flip-inner">
+          <div class="flip-front">
+            <img class="sector-img" src="~/assets/sectors/s6.jpg" alt="القطاع الرياضي" loading="lazy">
+            <div class="sector-front-overlay"></div>
+            <div class="sector-front-label">
+              <h3>القطاع الرياضي</h3>
+            </div>
+          </div>
+          <div class="flip-back">
+            <h3>القطاع الرياضي</h3>
+            <p>نطور الفعاليات والبرامج والتجارب الجماهيرية المصاحبة للأنشطة والبطولات الرياضية بما يدعم المشاركة ويعزز ارتباط الجمهور بالحدث أو النادي أو الجهة المنظمة.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="sector-card">
+        <div class="flip-inner">
+          <div class="flip-front">
+            <img class="sector-img" src="~/assets/sectors/s7.JPG" alt="قطاع التعليم وتنمية القدرات" loading="lazy">
+            <div class="sector-front-overlay"></div>
+            <div class="sector-front-label">
+              <h3>قطاع التعليم وتنمية القدرات</h3>
+            </div>
+          </div>
+          <div class="flip-back">
+            <h3>قطاع التعليم وتنمية القدرات</h3>
+            <p>نطور برامج وتجارب تعليمية وتدريبية تجمع بين المعرفة والتطبيق والمشاركة، وتحوّل المحتوى الترفيهي إلى رحلة تعلّم أكثر وضوحًا وتفاعلًا.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="sector-card">
+        <div class="flip-inner">
+          <div class="flip-front">
+            <img class="sector-img" src="~/assets/sectors/s8.jpg" alt="الرعاة والشركاء الاستراتيجيون" loading="lazy">
+            <div class="sector-front-overlay"></div>
+            <div class="sector-front-label">
+              <h3>الرعاة والشركاء الاستراتيجيون</h3>
+            </div>
+          </div>
+          <div class="flip-back">
+            <h3>الرعاة والشركاء الاستراتيجيون</h3>
+            <p>يمثل الرعاة والشركاء فئة ممتدة عبر مختلف القطاعات، وليست قطاعًا مستقلًا، وتعمل همم الحياة على تطوير فرص مشاركة وظهور وتفاعل ترتبط بأهداف الشراكة وطبيعة الجمهور، وتندمج داخل التجربة بصورة طبيعية.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="sector-card">
+        <div class="flip-inner">
+          <div class="flip-front">
+            <img class="sector-img" src="~/assets/sectors/s9.jpg" alt="قطاع الاستثمار" loading="lazy">
+            <div class="sector-front-overlay"></div>
+            <div class="sector-front-label">
+              <h3>قطاع الاستثمار</h3>
+            </div>
+          </div>
+          <div class="flip-back">
+            <h3>قطاع الاستثمار</h3>
+            <p>نطور الملتقيات والبرامج والتجارب التي تجمع رواد الأعمال والمستثمرين والجهات الداعمة، وتساعد على تحويل الأفكار والفرص إلى مسارات أوضح للتواصل والتقييم والبناء.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <button type="button" class="sectors-arrow sectors-arrow--next" data-dir="next" aria-label="القطاعات التالية">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 6l-6 6 6 6"/></svg>
+    </button>
+  </div>
+</section>
+<section class="bg-mist">
+  <div class="container">
+    <div class="head-row reveal">
+      <h2>أحداث و فعاليات همم الحياة</h2>
+      <a href="@Url.Action("News","Home",new{area="User"})" class="btn btn-outline">عرض الكل
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      </a>
+    </div>
+    <div class="grid grid-3">
+
+      <div class="news-card reveal">
+        <div class="news-thumb news-thumb--1" data-video-id="AFF3UljE3GI" role="button" tabindex="0" aria-label="تشغيل فيديو: همم الحياة تشارك في فعاليات موسم الرياض">
+          <img src="https://img.youtube.com/vi/AFF3UljE3GI/hqdefault.jpg" alt="" loading="lazy">
+          <button type="button" class="news-play" aria-hidden="true" tabindex="-1">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+        </div>
+        <a href="@Url.Action("NewsSingle","Home",new{area="User",id=1})" class="news-card-body">
+          <span class="news-date">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            12 يوليو 2026
+          </span>
+          <h3>همم الحياة تشارك في فعاليات موسم الرياض بتجربة تفاعلية جديدة تجمع بين الإبداع والتقنية</h3>
+          <span class="news-more">اقرأ المزيد
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          </span>
+        </a>
+      </div>
+
+      <div class="news-card reveal">
+        <div class="news-thumb news-thumb--2" data-video-id="5bgT4uaJYgg" role="button" tabindex="0" aria-label="تشغيل فيديو: إطلاق برنامج تدريبي لتنمية القدرات">
+          <img src="https://img.youtube.com/vi/5bgT4uaJYgg/hqdefault.jpg" alt="" loading="lazy">
+          <button type="button" class="news-play" aria-hidden="true" tabindex="-1">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+        </div>
+        <a href="@Url.Action("NewsSingle","Home",new{area="User",id=1})" class="news-card-body">
+          <span class="news-date">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            28 يونيو 2026
+          </span>
+          <h3>إطلاق برنامج تدريبي لتنمية القدرات ضمن قطاع التعليم بالشراكة مع جهة تعليمية</h3>
+          <span class="news-more">اقرأ المزيد
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          </span>
+        </a>
+      </div>
+
+      <div class="news-card reveal">
+        <div class="news-thumb news-thumb--3" data-video-id="FbsArEsIy0Q" role="button" tabindex="0" aria-label="تشغيل فيديو: توقيع شراكة استراتيجية مع إحدى الجهات الحكومية">
+          <img src="https://img.youtube.com/vi/FbsArEsIy0Q/hqdefault.jpg" alt="" loading="lazy">
+          <button type="button" class="news-play" aria-hidden="true" tabindex="-1">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+        </div>
+        <a href="@Url.Action("NewsSingle","Home",new{area="User",id=1})" class="news-card-body">
+          <span class="news-date">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            15 يونيو 2026
+          </span>
+          <h3>توقيع شراكة استراتيجية مع إحدى الجهات الحكومية لتطوير فعالية وطنية</h3>
+          <span class="news-more">اقرأ المزيد
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          </span>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="bg-ink">
+  <div class="container">
+    <div class="event-head reveal">
+      <div class="eyebrow">الحدث الأكبر القادم</div>
+    </div>
+    <div class="video-embed reveal" data-video-id="CO_EE1X9Oh4" role="button" tabindex="0" 
+      <img src="https://img.youtube.com/vi/CO_EE1X9Oh4/hqdefault.jpg" alt="" loading="lazy">
+      <button type="button" class="video-embed-play" aria-hidden="true" tabindex="-1">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+ 
+
+<section class="bg-mist section-sm">
+  <div class="container">
+    <div class="head-row reveal">
+      <h2>شركاؤنا</h2>
+    </div>
+    <div class="partners-marquee reveal">
+      <div class="logo-grid">
+        <div class="logo-tile"><img src="~/assets/partners/partners/royal-commission-makkah.svg" alt="الهيئة الملكية لمدينة مكة المكرمة والمشاعر المقدسة" loading="lazy"></div>
+        <div class="logo-tile"><img src="~/assets/partners/partners/isdb.svg" alt="البنك الإسلامي للتنمية" loading="lazy"></div>
+        <div class="logo-tile"><img src="~/assets/partners/partners/ministry-sports.svg" alt="وزارة الرياضة" loading="lazy"></div>
+        <div class="logo-tile"><img src="~/assets/partners/partners/ministry-hrsd.svg" alt="وزارة الموارد البشرية والتنمية الاجتماعية" loading="lazy"></div>
+        <div class="logo-tile"><img src="~/assets/partners/partners/saudi-fund-development.svg" alt="الصندوق السعودي للتنمية" loading="lazy"></div>
+        <div class="logo-tile"><img src="~/assets/partners/partners/national-development-fund.svg" alt="صندوق التنمية الوطني" loading="lazy"></div>
+        <div class="logo-tile"><img src="~/assets/partners/partners/hrdf.svg" alt="صندوق تنمية الموارد البشرية" loading="lazy"></div>
+        <div class="logo-tile"><img src="~/assets/partners/partners/jeddah-municipality.svg" alt="أمانة جدة" loading="lazy"></div>
+        <div class="logo-tile"><img src="~/assets/partners/partners/historic-jeddah.svg" alt="جدة التاريخية" loading="lazy"></div>
+        <div class="logo-tile"><img src="~/assets/partners/partners/real-estate-authority.svg" alt="الهيئة العامة للعقار" loading="lazy"></div>
+        <div class="logo-tile"><img src="~/assets/partners/partners/charitable-associations-council.svg" alt="مجلس الجمعيات الأهلية" loading="lazy"></div>
+        <div class="logo-tile"><img src="~/assets/partners/partners/makkah-newspaper.svg" alt="صحيفة مكة" loading="lazy"></div>
+        <!-- duplicated set for a seamless infinite loop -->
+        <div class="logo-tile" aria-hidden="true"><img src="~/assets/partners/partners/royal-commission-makkah.svg" alt="" loading="lazy"></div>
+        <div class="logo-tile" aria-hidden="true"><img src="~/assets/partners/partners/isdb.svg" alt="" loading="lazy"></div>
+        <div class="logo-tile" aria-hidden="true"><img src="~/assets/partners/partners/ministry-sports.svg" alt="" loading="lazy"></div>
+        <div class="logo-tile" aria-hidden="true"><img src="~/assets/partners/partners/ministry-hrsd.svg" alt="" loading="lazy"></div>
+        <div class="logo-tile" aria-hidden="true"><img src="~/assets/partners/partners/saudi-fund-development.svg" alt="" loading="lazy"></div>
+        <div class="logo-tile" aria-hidden="true"><img src="~/assets/partners/partners/national-development-fund.svg" alt="" loading="lazy"></div>
+        <div class="logo-tile" aria-hidden="true"><img src="~/assets/partners/partners/hrdf.svg" alt="" loading="lazy"></div>
+        <div class="logo-tile" aria-hidden="true"><img src="~/assets/partners/partners/jeddah-municipality.svg" alt="" loading="lazy"></div>
+        <div class="logo-tile" aria-hidden="true"><img src="~/assets/partners/partners/historic-jeddah.svg" alt="" loading="lazy"></div>
+        <div class="logo-tile" aria-hidden="true"><img src="~/assets/partners/partners/real-estate-authority.svg" alt="" loading="lazy"></div>
+        <div class="logo-tile" aria-hidden="true"><img src="~/assets/partners/partners/charitable-associations-council.svg" alt="" loading="lazy"></div>
+        <div class="logo-tile" aria-hidden="true"><img src="~/assets/partners/partners/makkah-newspaper.svg" alt="" loading="lazy"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bg-ink why-section">
+  <div class="container">
+    <div class="why-head reveal">
+      <div class="eyebrow">لماذا همم الحياة؟</div>
+      <h2>لأننا نحوّل الأهداف إلى تجارب تُصنع بعناية وتُقاس نتائجها</h2>
+      <p>لا نقدّم حلولاً جاهزة، بل نبدأ من فهم حقيقي لأهداف الجهة واحتياجات جمهورها، لنبني تجربة مترابطة من الفكرة إلى الأثر.</p>
+    </div>
+
+    <div class="why-grid">
+      <div class="why-card reveal">
+        <span class="why-num">01</span>
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        </div>
+        <h3>فهم قبل التنفيذ</h3>
+        <p>نبدأ بفهم عميق لأهداف الجهة واحتياجات جمهورها قبل أي خطوة تنفيذية.</p>
+      </div>
+
+      <div class="why-card reveal">
+        <span class="why-num">02</span>
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>
+        </div>
+        <h3>تنفيذ مدروس وقابل للقياس</h3>
+        <p>نحوّل الأفكار إلى خطط عملية ومخرجات واضحة يمكن قياس نتائجها.</p>
+      </div>
+
+      <div class="why-card reveal">
+        <span class="why-num">03</span>
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3>جهود موحّدة وأثر مستدام</h3>
+        <p>نوحّد جهود الفرق والشركاء ضمن نطاق واضح يضمن جودة التنفيذ واستدامة الأثر.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section-sm">
+  <div class="container">
+    <div class="cta-band reveal">
+      <div>
+        <h2>لديك هدف تريد تحويله إلى تجربة؟</h2>
+        <p>لنتحدث عن مشروعك القادم، ونبني معًا مفهومًا قابلًا للتنفيذ والقياس.</p>
+      </div>
+      <a href="@Url.Action("Contact","Home",new{area="User"})" class="btn btn-ghost-light">تواصل معنا
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+@section Scripts {
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="~/js/user/index.js"></script>
+}

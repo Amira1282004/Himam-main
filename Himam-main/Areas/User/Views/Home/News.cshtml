@@ -1,0 +1,200 @@
+@{
+    ViewData["Title"] = "أخبار وفعاليات | همم الحياة";
+    ViewData["Description"] = "آخر أخبار وفعاليات همم الحياة، ومتابعة أهم البرامج والمشاريع.";
+    ViewData["Active"] = "news";
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/user/news.css">
+}
+
+<section class="page-hero">
+  <div class="container">
+    <div class="crumb"><a href="@Url.Action("Index","Home",new{area="User"})">الرئيسية</a><span>/</span><span>أخبار وفعاليات</span></div>
+    <div class="eyebrow">أخبار وفعاليات</div>
+    <h1>آخر مستجداتنا<br>وفعالياتنا القادمة</h1>
+    <p class="lede">تابع أحدث الأخبار والبرامج والفعاليات التي ننفذها مع شركائنا من مختلف القطاعات.</p>
+  </div>
+</section>
+
+<section style="padding-bottom:60px;">
+  <div class="container">
+    <div class="head-row reveal">
+      <h2>أهم الأخبار والفعاليات</h2>
+      <p>لا تفوّت آخر ما نشرناه.</p>
+    </div>
+  </div>
+  <div class="container news-scroll-wrap">
+    <div class="news-scroll reveal">
+      <a href="@Url.Action("NewsSingle","Home",new{area="User",id=1})" class="news-feature">
+        <div class="thumb">فعالية</div>
+        <div class="body">
+          <div class="meta">12 يوليو 2026</div>
+          <h3>إطلاق موسم الفعاليات الترفيهية بجدة</h3>
+          <span class="more">اقرأ المزيد
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          </span>
+        </div>
+      </a>
+      <a href="@Url.Action("NewsSingle","Home",new{area="User",id=1})" class="news-feature">
+        <div class="thumb">خبر</div>
+        <div class="body">
+          <div class="meta">02 يوليو 2026</div>
+          <h3>همم الحياة شريك رسمي لبرنامج تنمية القدرات</h3>
+          <span class="more">اقرأ المزيد
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          </span>
+        </div>
+      </a>
+      <a href="@Url.Action("NewsSingle","Home",new{area="User",id=1})" class="news-feature">
+        <div class="thumb">فعالية</div>
+        <div class="body">
+          <div class="meta">21 يونيو 2026</div>
+          <h3>توقيع شراكة استراتيجية مع قطاع السياحة</h3>
+          <span class="more">اقرأ المزيد
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          </span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- كل الأخبار -->
+<section class="bg-mist">
+  <div class="container">
+    <div class="head-row reveal">
+      <h2>جميع الأخبار والفعاليات</h2>
+      <p>تصفّح كل ما نشرناه.</p>
+    </div>
+
+    <div class="news-toolbar reveal">
+      <div class="chip-row">
+        <button class="chip active" data-cat="all">الكل</button>
+        <button class="chip" data-cat="event">فعاليات</button>
+        <button class="chip" data-cat="news">أخبار</button>
+      </div>
+      <div class="search-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input type="text" placeholder="ابحث بالاسم...">
+      </div>
+    </div>
+
+    <div class="news-grid" id="newsGrid">
+      <a href="@Url.Action("NewsSingle","Home",new{area="User",id=1})" class="news-card reveal" data-cat="event" data-title="إطلاق موسم الفعاليات الترفيهية بجدة">
+        <div class="thumb">فعالية</div>
+        <div class="body">
+          <div class="meta">12 يوليو 2026</div>
+          <h3>إطلاق موسم الفعاليات الترفيهية بجدة</h3>
+          <span class="more">اقرأ المزيد
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          </span>
+        </div>
+      </a>
+      <a href="@Url.Action("NewsSingle","Home",new{area="User",id=1})" class="news-card reveal" data-cat="news" data-title="همم الحياة شريك رسمي لبرنامج تنمية القدرات">
+        <div class="thumb">خبر</div>
+        <div class="body">
+          <div class="meta">02 يوليو 2026</div>
+          <h3>همم الحياة شريك رسمي لبرنامج تنمية القدرات</h3>
+          <span class="more">اقرأ المزيد
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          </span>
+        </div>
+      </a>
+      <a href="@Url.Action("NewsSingle","Home",new{area="User",id=1})" class="news-card reveal" data-cat="event" data-title="توقيع شراكة استراتيجية مع قطاع السياحة">
+        <div class="thumb">فعالية</div>
+        <div class="body">
+          <div class="meta">21 يونيو 2026</div>
+          <h3>توقيع شراكة استراتيجية مع قطاع السياحة</h3>
+          <span class="more">اقرأ المزيد
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          </span>
+        </div>
+      </a>
+      <a href="@Url.Action("NewsSingle","Home",new{area="User",id=1})" class="news-card reveal" data-cat="news" data-title="ورشة عمل حول تصميم التجارب المؤسسية">
+        <div class="thumb">خبر</div>
+        <div class="body">
+          <div class="meta">10 يونيو 2026</div>
+          <h3>ورشة عمل حول تصميم التجارب المؤسسية</h3>
+          <span class="more">اقرأ المزيد
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          </span>
+        </div>
+      </a>
+      <a href="@Url.Action("NewsSingle","Home",new{area="User",id=1})" class="news-card reveal" data-cat="event" data-title="مهرجان الفعاليات الثقافية 2026">
+        <div class="thumb">فعالية</div>
+        <div class="body">
+          <div class="meta">28 مايو 2026</div>
+          <h3>مهرجان الفعاليات الثقافية 2026</h3>
+          <span class="more">اقرأ المزيد
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          </span>
+        </div>
+      </a>
+      <a href="@Url.Action("NewsSingle","Home",new{area="User",id=1})" class="news-card reveal" data-cat="news" data-title="همم الحياة تطلق برنامج تدريب داخلي جديد">
+        <div class="thumb">خبر</div>
+        <div class="body">
+          <div class="meta">14 مايو 2026</div>
+          <h3>همم الحياة تطلق برنامج تدريب داخلي جديد</h3>
+          <span class="more">اقرأ المزيد
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          </span>
+        </div>
+      </a>
+      <a href="@Url.Action("NewsSingle","Home",new{area="User",id=1})" class="news-card reveal" data-cat="event" data-title="فعالية يوم التأسيس بالتعاون مع القطاع الحكومي">
+        <div class="thumb">فعالية</div>
+        <div class="body">
+          <div class="meta">02 مايو 2026</div>
+          <h3>فعالية يوم التأسيس بالتعاون مع القطاع الحكومي</h3>
+          <span class="more">اقرأ المزيد
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          </span>
+        </div>
+      </a>
+      <a href="@Url.Action("NewsSingle","Home",new{area="User",id=1})" class="news-card reveal" data-cat="news" data-title="شراكة جديدة مع علامة تجارية رائدة">
+        <div class="thumb">خبر</div>
+        <div class="body">
+          <div class="meta">20 أبريل 2026</div>
+          <h3>شراكة جديدة مع علامة تجارية رائدة</h3>
+          <span class="more">اقرأ المزيد
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          </span>
+        </div>
+      </a>
+      <a href="@Url.Action("NewsSingle","Home",new{area="User",id=1})" class="news-card reveal" data-cat="event" data-title="معرض التجارب التفاعلية بالرياض">
+        <div class="thumb">فعالية</div>
+        <div class="body">
+          <div class="meta">05 أبريل 2026</div>
+          <h3>معرض التجارب التفاعلية بالرياض</h3>
+          <span class="more">اقرأ المزيد
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          </span>
+        </div>
+      </a>
+    </div>
+
+    <div class="pagination">
+      <button class="active">1</button>
+      <button>2</button>
+      <button>3</button>
+      <button>›</button>
+    </div>
+  </div>
+</section>
+
+<section class="section-sm">
+  <div class="container">
+    <div class="cta-band reveal">
+      <div>
+        <h2>لديك هدف تريد تحويله إلى تجربة؟</h2>
+        <p>لنتحدث عن مشروعك القادم، ونبني معًا مفهومًا قابلًا للتنفيذ والقياس.</p>
+      </div>
+      <a href="@Url.Action("Contact","Home",new{area="User"})" class="btn btn-ghost-light">تواصل معنا
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+@section Scripts {
+    <script src="~/js/user/news.js"></script>
+}
