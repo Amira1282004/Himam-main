@@ -1,0 +1,93 @@
+@model Himam_main.ViewModels.AcceptInviteViewModel
+@{
+    ViewData["Title"] = "إنشاء حساب من الدعوة";
+    ViewData["Description"] = "أكمل إنشاء حسابك في لوحة تحكم همم الحياة";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/dashboard/admin-signup.css">
+}
+
+<section style="padding-top:50px;">
+  <div class="container">
+    <div class="auth-wrap">
+      <div class="auth-card reveal">
+
+        <div class="logo"><img src="~/assets/logo-stacked-trim.png" alt="همم الحياة"></div>
+
+        @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+        {
+          <p style="color:#c0392b;font-weight:600;text-align:center;margin-bottom:16px;">@Model.ErrorMessage</p>
+        }
+        @if (!string.IsNullOrEmpty(Model.SuccessMessage))
+        {
+          <p style="color:var(--turquoise-600);font-weight:600;text-align:center;margin-bottom:16px;">@Model.SuccessMessage</p>
+        }
+
+        @if (Model.Step == "register" && !string.IsNullOrEmpty(Model.Token))
+        {
+          <p style="text-align:center;color:#666;margin-bottom:20px;">
+            تمت دعوتك كـ <strong>@Model.RoleArabic</strong>
+          </p>
+
+          <form asp-action="AcceptInviteRegister" method="post" class="auth-form">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="token" value="@Model.Token">
+
+            <div class="field">
+              <label>البريد الإلكتروني</label>
+              <input type="email" value="@Model.Email" readonly style="opacity:.8;">
+            </div>
+            <div class="field">
+              <label for="fullName">الاسم الكامل</label>
+              <input type="text" id="fullName" name="fullName" value="@Model.SuggestedFullName" placeholder="اسمك الكامل" required>
+            </div>
+            <div class="field">
+              <label for="username">اسم المستخدم</label>
+              <input type="text" id="username" name="username" placeholder="username" required pattern="[a-zA-Z0-9_\.]{3,50}">
+            </div>
+            <div class="field">
+              <label for="password">كلمة المرور</label>
+              <input type="password" id="password" name="password" minlength="8" required>
+            </div>
+            <div class="field">
+              <label for="password2">تأكيد كلمة المرور</label>
+              <input type="password" id="password2" name="password2" minlength="8" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width:100%;margin-top:8px;">إنشاء الحساب وإرسال رمز التأكيد</button>
+          </form>
+        }
+        else if (Model.Step == "verify" && Model.UserId.HasValue)
+        {
+          <p style="text-align:center;color:#666;margin-bottom:20px;">
+            أدخل رمز التأكيد المكوّن من 6 أرقام المرسل إلى<br><strong>@Model.Email</strong>
+          </p>
+
+          <form asp-action="AcceptInviteVerify" method="post" class="auth-form">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="token" value="@Model.Token">
+            <input type="hidden" name="userId" value="@Model.UserId">
+
+            <div class="field">
+              <label for="code">رمز التأكيد</label>
+              <input type="text" id="code" name="code" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" placeholder="000000" required
+                     style="text-align:center;font-size:24px;letter-spacing:8px;font-weight:700;">
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width:100%;">تأكيد والدخول للوحة التحكم</button>
+          </form>
+
+          <form asp-action="AcceptInviteResendCode" method="post" style="margin-top:14px;text-align:center;">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="token" value="@Model.Token">
+            <input type="hidden" name="userId" value="@Model.UserId">
+            <button type="submit" class="btn btn-outline btn-sm">إعادة إرسال الرمز</button>
+          </form>
+        }
+
+        <p class="auth-switch" style="margin-top:24px;">لديك حساب؟ <a asp-action="Login">تسجيل الدخول</a></p>
+      </div>
+    </div>
+  </div>
+</section>

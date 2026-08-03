@@ -1,0 +1,13 @@
+@{
+    ViewData["Title"] = "غير مصرح | همم الحياة";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<section style="min-height:70vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:40px 20px;">
+  <div>
+    <h1 style="font-size:2rem;margin-bottom:12px;">غير مصرح بالوصول</h1>
+    <p style="color:#666;margin-bottom:24px;">ليس لديك صلاحية للوصول إلى هذا القسم.</p>
+    <a href="@Url.Action("Index", "Dashboard", new { area = "Admin" })" style="margin-left:12px;">العودة للوحة التحكم</a>
+    <a href="@Url.Action("Login", "Account", new { area = "Admin" })">تسجيل الدخول</a>
+  </div>
+</section>

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Himam-main")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9f2ea266c95579d7897c61f7e2e84a5fd7c053b4")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+119f5917bdc34de5b45e95efe70751180d90f016")]
 [assembly: System.Reflection.AssemblyProductAttribute("Himam-main")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Himam-main")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

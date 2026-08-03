@@ -1,0 +1,14 @@
+@{
+    ViewData["Title"] = "الصفحة غير موجودة | همم الحياة";
+    ViewData["Description"] = "الصفحة التي تبحث عنها غير موجودة.";
+    Layout = "~/Areas/User/Views/Shared/_Layout.cshtml";
+}
+
+<section style="min-height:60vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:80px 20px;">
+  <div>
+    <div style="font-size:72px;font-weight:800;color:var(--turquoise-600,#0d9488);margin-bottom:12px;">404</div>
+    <h1 style="font-size:1.8rem;margin-bottom:12px;">الصفحة غير موجودة</h1>
+    <p style="color:#666;margin-bottom:28px;max-width:420px;">عذراً، الصفحة التي تبحث عنها غير متوفرة أو تم نقلها.</p>
+    <a href="@Url.Action("Index","Home",new{area="User"})" class="btn btn-primary">العودة للرئيسية</a>
+  </div>
+</section>
