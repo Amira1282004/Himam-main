@@ -374,6 +374,7 @@ public static class DbSeeder
                 Address = "جدة، حي مشرفة شارع عين الوهيط مبني 3654 الرمز البريدي23332",
                 WorkingHours = "الأحد – الخميس، 9 صباحًا – 5 مساءً",
                 MapEmbedUrl = "https://www.google.com/maps?q=%D8%AC%D8%AF%D8%A9%D8%8C%20%D8%AD%D9%8A%20%D9%85%D8%B4%D8%B1%D9%81%D8%A9%D8%8C%20%D8%B4%D8%A7%D8%B1%D8%B9%20%D8%B9%D9%8A%D9%86%20%D8%A7%D9%84%D9%88%D9%87%D9%8A%D8%B7&output=embed",
+                SortOrder = 1,
                 IsVisible = true,
                 CreatedAt = DateTime.Now,
                 UpdatedAt = DateTime.Now,
@@ -391,6 +392,7 @@ public static class DbSeeder
                 new SocialMediaLink
                 {
                     Platform = "X",
+                    PlatformName = "إكس",
                     Url = "#",
                     IconSvg = "<path d=\"M18.9 3H21l-6.6 7.5L22 21h-6.3l-4.9-6.4L5.2 21H3l7.1-8.1L2.5 3h6.4l4.4 5.8L18.9 3zm-1.1 16h1.2L7.3 5H6l11.8 14z\"/>",
                     IsVisible = true,
@@ -402,6 +404,7 @@ public static class DbSeeder
                 new SocialMediaLink
                 {
                     Platform = "Instagram",
+                    PlatformName = "انستقرام",
                     Url = "#",
                     IconSvg = "<rect x=\"3\" y=\"3\" width=\"18\" height=\"18\" rx=\"5\"/><circle cx=\"12\" cy=\"12\" r=\"4\"/><circle cx=\"17.5\" cy=\"6.5\" r=\"1\"/>",
                     IsVisible = true,
@@ -413,6 +416,7 @@ public static class DbSeeder
                 new SocialMediaLink
                 {
                     Platform = "LinkedIn",
+                    PlatformName = "لينكد إن",
                     Url = "#",
                     IconSvg = "<path d=\"M4.98 3.5A2.5 2.5 0 1 1 5 8.5a2.5 2.5 0 0 1-.02-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.6c0-1.34-.02-3.06-1.87-3.06-1.87 0-2.16 1.46-2.16 2.96V21H9z\"/>",
                     IsVisible = true,
@@ -424,6 +428,7 @@ public static class DbSeeder
                 new SocialMediaLink
                 {
                     Platform = "Facebook",
+                    PlatformName = "فيسبوك",
                     Url = "#",
                     IconSvg = "<path d=\"M13.5 9H15V6h-1.6C11.4 6 10 7.5 10 9.8V11H8v3h2v7h3v-7h2.1l.4-3H13v-1c0-.6.2-1 .5-1z\"/>",
                     IsVisible = true,
@@ -435,6 +440,7 @@ public static class DbSeeder
                 new SocialMediaLink
                 {
                     Platform = "Snapchat",
+                    PlatformName = "سناب شات",
                     Url = "#",
                     IconSvg = "<path d=\"M12 3.2c-2.9 0-4.9 2.1-4.9 5v1.9c0 .8 0 1.5-.2 1.9-.3.7-1.4.9-2 1.2-.4.2-.3.6 0 .8.5.3 1.1.4 1.5.5.3.1.1.5-.1.8-.3.4-.8.8-.3 1.2.6.4 1.7.2 2.4.6.6.3.8 1.2 1.9 1.4.5.1 1-.1 1.6-.1.5 0 1 .2 1.6.1 1.1-.2 1.3-1.1 1.9-1.4.7-.4 1.8-.2 2.4-.6.5-.4 0-.8-.3-1.2-.2-.3-.4-.7-.1-.8.4-.1 1-.2 1.5-.5.3-.2.4-.6 0-.8-.6-.3-1.7-.5-2-1.2-.2-.4-.2-1.1-.2-1.9V8.2c0-2.9-2-5-4.9-5z\"/>",
                     IsVisible = true,
@@ -446,6 +452,7 @@ public static class DbSeeder
                 new SocialMediaLink
                 {
                     Platform = "TikTok",
+                    PlatformName = "تيك توك",
                     Url = "#",
                     IconSvg = "<path d=\"M16.5 2h-3v13.6a2.5 2.5 0 1 1-2.2-2.5v-3.2a5.6 5.6 0 1 0 5.2 5.6V9.1c1.2.8 2.6 1.3 4 1.3V7.3c-2 0-3.7-1.3-4.3-3.1-.2-.6-.2-1.4-.2-2.2z\"/>",
                     IsVisible = true,
@@ -457,6 +464,7 @@ public static class DbSeeder
                 new SocialMediaLink
                 {
                     Platform = "YouTube",
+                    PlatformName = "يوتيوب",
                     Url = "#",
                     IconSvg = "<path d=\"M22 8.4s-.2-1.5-.8-2.2c-.8-.9-1.7-.9-2.1-1C16.3 5 12 5 12 5s-4.3 0-7.1.2c-.4.1-1.3.1-2.1 1-.6.7-.8 2.2-.8 2.2S1.8 10.2 1.8 12v1.6c0 1.8.2 3.6.2 3.6s.2 1.5.8 2.2c.8.9 1.9.9 2.3 1 1.7.2 7 .2 7 .2s4.3 0 7.1-.2c.4-.1 1.3-.1 2.1-1 .6-.7.8-2.2.8-2.2s.2-1.8.2-3.6V12c0-1.8-.2-3.6-.2-3.6zM9.8 15.2V8.9l6 3.2-6 3.1z\"/>",
                     IsVisible = true,
@@ -468,6 +476,7 @@ public static class DbSeeder
                 new SocialMediaLink
                 {
                     Platform = "WhatsApp",
+                    PlatformName = "واتساب",
                     Url = "#",
                     IconSvg = "<path d=\"M12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.6 1.4 5.1L2 22l5-1.3c1.4.8 3.1 1.3 5 1.3 5.5 0 10-4.5 10-10S17.5 2 12 2zm5.6 14.2c-.2.6-1.3 1.2-1.8 1.3-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.4.2.5.7 1.8.8 1.9.1.1.1.3 0 .5-.1.2-.1.3-.3.5-.1.2-.3.4-.4.5-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.5 1.5.3.1.5.1.7-.1.2-.2.7-.8.9-1.1.2-.3.4-.2.6-.1.2.1 1.5.7 1.8.8.3.1.4.2.5.3.1.2.1.9-.1 1.5z\"/>",
                     IsVisible = true,
@@ -478,6 +487,31 @@ public static class DbSeeder
                 }
             };
             context.SocialMediaLinks.AddRange(socialLinks);
+            await context.SaveChangesAsync();
+        }
+        else
+        {
+            // Update existing social media links to have PlatformName
+            var existingLinks = await context.SocialMediaLinks.ToListAsync();
+            foreach (var link in existingLinks)
+            {
+                if (string.IsNullOrEmpty(link.PlatformName))
+                {
+                    link.PlatformName = link.Platform switch
+                    {
+                        "X" => "إكس",
+                        "Instagram" => "انستقرام",
+                        "LinkedIn" => "لينكد إن",
+                        "Facebook" => "فيسبوك",
+                        "Snapchat" => "سناب شات",
+                        "TikTok" => "تيك توك",
+                        "YouTube" => "يوتيوب",
+                        "WhatsApp" => "واتساب",
+                        _ => link.Platform
+                    };
+                    link.UpdatedAt = DateTime.Now;
+                }
+            }
             await context.SaveChangesAsync();
         }
 

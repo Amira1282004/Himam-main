@@ -1,6 +1,7 @@
 using System.Security.Claims;
 using Himam_main.Data;
 using Himam_main.Models;
+using Himam_main.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -12,10 +13,12 @@ namespace Himam_main.Areas.Admin.Controllers
     public class ContentController : Controller
     {
         private readonly HimanAlhayahContext _context;
+        private readonly IAuditLogService _auditLogService;
 
-        public ContentController(HimanAlhayahContext context)
+        public ContentController(HimanAlhayahContext context, IAuditLogService auditLogService)
         {
             _context = context;
+            _auditLogService = auditLogService;
         }
 
         // Hero Section Management
@@ -207,6 +210,15 @@ namespace Himam_main.Areas.Admin.Controllers
 
             if (existing != null)
             {
+                var oldValues = new
+                {
+                    existing.Title,
+                    existing.Description,
+                    existing.Image,
+                    existing.IsVisible,
+                    existing.SortOrder
+                };
+
                 existing.Title = model.Title;
                 existing.Description = model.Description;
                 existing.Image = model.Image;
@@ -215,7 +227,16 @@ namespace Himam_main.Areas.Admin.Controllers
                 existing.UpdatedAt = DateTime.Now;
                 existing.UserId = userId;
 
-                await LogChange("Sector", "تعديل قطاع", $"تعديل قطاع: {model.Title}");
+                var newValues = new
+                {
+                    model.Title,
+                    model.Description,
+                    model.Image,
+                    model.IsVisible,
+                    model.SortOrder
+                };
+
+                await LogChange("Sector", "تعديل قطاع", $"تعديل قطاع: {model.Title}", oldValues, newValues, model.Id);
 
                 await _context.SaveChangesAsync();
             }
@@ -500,21 +521,19 @@ namespace Himam_main.Areas.Admin.Controllers
             return View(logs);
         }
 
-        private async Task LogChange(string entityType, string action, string details)
+        private async Task LogChange(string entityType, string action, string details, object? oldValues = null, object? newValues = null, int? entityId = null)
         {
             var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
-            var ipAddress = HttpContext.Connection.RemoteIpAddress?.ToString() ?? "Unknown";
-
-            _context.AuditLogs.Add(new AuditLog
-            {
-                UserId = userId,
-                Action = $"{entityType} - {action}",
-                Details = details,
-                IpAddress = ipAddress,
-                CreatedAt = DateTime.Now
-            });
-
-            await _context.SaveChangesAsync();
+            
+            await _auditLogService.LogEntityChangeAsync(
+                entityName: entityType,
+                actionType: action,
+                userId: userId,
+                entityId: entityId,
+                oldValues: oldValues,
+                newValues: newValues,
+                httpContext: HttpContext
+            );
         }
     }
 }

@@ -9,6 +9,8 @@ public partial class SocialMediaLink
 
     public string? Platform { get; set; }
 
+    public string? PlatformName { get; set; }
+
     public string? Url { get; set; }
 
     public string? IconSvg { get; set; }

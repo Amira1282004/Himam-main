@@ -507,6 +507,7 @@ public partial class HimanAlhayahContext : DbContext
                 .HasColumnType("datetime");
             entity.Property(e => e.IconSvg).HasMaxLength(2000);
             entity.Property(e => e.Platform).HasMaxLength(50);
+            entity.Property(e => e.PlatformName).HasMaxLength(100);
             entity.Property(e => e.Url).HasMaxLength(500);
             entity.Property(e => e.UpdatedAt)
                 .HasDefaultValueSql("(getdate())")

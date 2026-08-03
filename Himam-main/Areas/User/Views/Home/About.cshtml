@@ -76,7 +76,7 @@
             @foreach (var step in Model.ProcessSteps)
             {
                 <div class="process-step">
-                  <div class="badge">@step.StepNumber.ToString("D2")</div>
+                  <div class="badge">@(step.StepNumber?.ToString().PadLeft(2, '0') ?? "01")</div>
                   <h4>@step.Title</h4>
                   <p>@step.Subtitle</p>
                 </div>
