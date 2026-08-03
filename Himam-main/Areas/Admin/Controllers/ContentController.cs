@@ -76,8 +76,31 @@ namespace Himam_main.Areas.Admin.Controllers
                 existing.UpdatedAt = DateTime.Now;
                 existing.UserId = userId;
 
-                // Log the change
-                await LogChange("HeroSection", "تعديل قسم Hero", $"تعديل قسم Hero: {model.Title}");
+                var oldValues = new
+                {
+                    existing.Title,
+                    existing.Subtitle,
+                    existing.CtaText,
+                    existing.CtaLink,
+                    existing.YoutubeVideoId,
+                    existing.IsVideoEnabled,
+                    existing.IsVisible,
+                    existing.SortOrder
+                };
+
+                var newValues = new
+                {
+                    model.Title,
+                    model.Subtitle,
+                    model.CtaText,
+                    model.CtaLink,
+                    model.YoutubeVideoId,
+                    model.IsVideoEnabled,
+                    model.IsVisible,
+                    model.SortOrder
+                };
+
+                await LogChange("HeroSection", "تعديل قسم Hero", $"تعديل قسم Hero: {model.Title}", oldValues, newValues, model.Id);
 
                 await _context.SaveChangesAsync();
             }
@@ -142,7 +165,33 @@ namespace Himam_main.Areas.Admin.Controllers
                 existing.UpdatedAt = DateTime.Now;
                 existing.UserId = userId;
 
-                await LogChange("AboutSection", "تعديل قسم About", $"تعديل قسم About: {model.Title}");
+                var oldValues = new
+                {
+                    existing.Eyebrow,
+                    existing.Title,
+                    existing.Description,
+                    existing.AdditionalDescription,
+                    existing.ChairmanName,
+                    existing.ChairmanTitle,
+                    existing.ChairmanImage,
+                    existing.IsVisible,
+                    existing.SortOrder
+                };
+
+                var newValues = new
+                {
+                    model.Eyebrow,
+                    model.Title,
+                    model.Description,
+                    model.AdditionalDescription,
+                    model.ChairmanName,
+                    model.ChairmanTitle,
+                    model.ChairmanImage,
+                    model.IsVisible,
+                    model.SortOrder
+                };
+
+                await LogChange("AboutSection", "تعديل قسم About", $"تعديل قسم About: {model.Title}", oldValues, newValues, model.Id);
 
                 await _context.SaveChangesAsync();
             }
@@ -183,7 +232,16 @@ namespace Himam_main.Areas.Admin.Controllers
             _context.Sectors.Add(model);
             await _context.SaveChangesAsync();
 
-            await LogChange("Sector", "إنشاء قطاع جديد", $"إنشاء قطاع: {model.Title}");
+            var newValues = new
+            {
+                model.Title,
+                model.Description,
+                model.Image,
+                model.IsVisible,
+                model.SortOrder
+            };
+
+            await LogChange("Sector", "إنشاء قطاع جديد", $"إنشاء قطاع: {model.Title}", null, newValues, model.Id);
 
             TempData["SuccessMessage"] = "تم إنشاء القطاع بنجاح";
             return RedirectToAction(nameof(Sectors));
@@ -252,10 +310,19 @@ namespace Himam_main.Areas.Admin.Controllers
             var sector = await _context.Sectors.FindAsync(id);
             if (sector != null)
             {
+                var oldValues = new
+                {
+                    sector.Title,
+                    sector.Description,
+                    sector.Image,
+                    sector.IsVisible,
+                    sector.SortOrder
+                };
+
                 _context.Sectors.Remove(sector);
                 await _context.SaveChangesAsync();
 
-                await LogChange("Sector", "حذف قطاع", $"حذف قطاع: {sector.Title}");
+                await LogChange("Sector", "حذف قطاع", $"حذف قطاع: {sector.Title}", oldValues, null, sector.Id);
 
                 TempData["SuccessMessage"] = "تم حذف القطاع بنجاح";
             }
@@ -295,7 +362,15 @@ namespace Himam_main.Areas.Admin.Controllers
             _context.CompanyValues.Add(model);
             await _context.SaveChangesAsync();
 
-            await LogChange("CompanyValue", "إنشاء قيمة جديدة", $"إنشاء قيمة: {model.Title}");
+            var newValues = new
+            {
+                model.Title,
+                model.Content,
+                model.IsVisible,
+                model.SortOrder
+            };
+
+            await LogChange("CompanyValue", "إنشاء قيمة جديدة", $"إنشاء قيمة: {model.Title}", null, newValues, model.Id);
 
             TempData["SuccessMessage"] = "تم إنشاء القيمة بنجاح";
             return RedirectToAction(nameof(CompanyValues));
@@ -329,7 +404,23 @@ namespace Himam_main.Areas.Admin.Controllers
                 existing.UpdatedAt = DateTime.Now;
                 existing.UserId = userId;
 
-                await LogChange("CompanyValue", "تعديل قيمة", $"تعديل قيمة: {model.Title}");
+                var oldValues = new
+                {
+                    existing.Title,
+                    existing.Content,
+                    existing.IsVisible,
+                    existing.SortOrder
+                };
+
+                var newValues = new
+                {
+                    model.Title,
+                    model.Content,
+                    model.IsVisible,
+                    model.SortOrder
+                };
+
+                await LogChange("CompanyValue", "تعديل قيمة", $"تعديل قيمة: {model.Title}", oldValues, newValues, model.Id);
 
                 await _context.SaveChangesAsync();
             }
@@ -345,10 +436,18 @@ namespace Himam_main.Areas.Admin.Controllers
             var value = await _context.CompanyValues.FindAsync(id);
             if (value != null)
             {
+                var oldValues = new
+                {
+                    value.Title,
+                    value.Content,
+                    value.IsVisible,
+                    value.SortOrder
+                };
+
                 _context.CompanyValues.Remove(value);
                 await _context.SaveChangesAsync();
 
-                await LogChange("CompanyValue", "حذف قيمة", $"حذف قيمة: {value.Title}");
+                await LogChange("CompanyValue", "حذف قيمة", $"حذف قيمة: {value.Title}", oldValues, null, value.Id);
 
                 TempData["SuccessMessage"] = "تم حذف القيمة بنجاح";
             }
@@ -406,7 +505,29 @@ namespace Himam_main.Areas.Admin.Controllers
                 existing.UpdatedAt = DateTime.Now;
                 existing.UserId = userId;
 
-                await LogChange("ContactInfo", "تعديل معلومات التواصل", "تعديل معلومات التواصل");
+                var oldValues = new
+                {
+                    existing.Email,
+                    existing.Phone,
+                    existing.Address,
+                    existing.WorkingHours,
+                    existing.MapEmbedUrl,
+                    existing.IsVisible,
+                    existing.SortOrder
+                };
+
+                var newValues = new
+                {
+                    model.Email,
+                    model.Phone,
+                    model.Address,
+                    model.WorkingHours,
+                    model.MapEmbedUrl,
+                    model.IsVisible,
+                    model.SortOrder
+                };
+
+                await LogChange("ContactInfo", "تعديل معلومات التواصل", "تعديل معلومات التواصل", oldValues, newValues, model.Id);
 
                 await _context.SaveChangesAsync();
             }
@@ -447,7 +568,17 @@ namespace Himam_main.Areas.Admin.Controllers
             _context.SocialMediaLinks.Add(model);
             await _context.SaveChangesAsync();
 
-            await LogChange("SocialMediaLink", "إنشاء رابط اجتماعي جديد", $"إنشاء رابط: {model.Platform}");
+            var newValues = new
+            {
+                model.Platform,
+                model.PlatformName,
+                model.Url,
+                model.IconSvg,
+                model.IsVisible,
+                model.SortOrder
+            };
+
+            await LogChange("SocialMediaLink", "إنشاء رابط اجتماعي جديد", $"إنشاء رابط: {model.Platform}", null, newValues, model.Id);
 
             TempData["SuccessMessage"] = "تم إنشاء الرابط الاجتماعي بنجاح";
             return RedirectToAction(nameof(SocialMediaLinks));
@@ -482,7 +613,27 @@ namespace Himam_main.Areas.Admin.Controllers
                 existing.UpdatedAt = DateTime.Now;
                 existing.UserId = userId;
 
-                await LogChange("SocialMediaLink", "تعديل رابط اجتماعي", $"تعديل رابط: {model.Platform}");
+                var oldValues = new
+                {
+                    existing.Platform,
+                    existing.PlatformName,
+                    existing.Url,
+                    existing.IconSvg,
+                    existing.IsVisible,
+                    existing.SortOrder
+                };
+
+                var newValues = new
+                {
+                    model.Platform,
+                    model.PlatformName,
+                    model.Url,
+                    model.IconSvg,
+                    model.IsVisible,
+                    model.SortOrder
+                };
+
+                await LogChange("SocialMediaLink", "تعديل رابط اجتماعي", $"تعديل رابط: {model.Platform}", oldValues, newValues, model.Id);
 
                 await _context.SaveChangesAsync();
             }
@@ -498,10 +649,20 @@ namespace Himam_main.Areas.Admin.Controllers
             var link = await _context.SocialMediaLinks.FindAsync(id);
             if (link != null)
             {
+                var oldValues = new
+                {
+                    link.Platform,
+                    link.PlatformName,
+                    link.Url,
+                    link.IconSvg,
+                    link.IsVisible,
+                    link.SortOrder
+                };
+
                 _context.SocialMediaLinks.Remove(link);
                 await _context.SaveChangesAsync();
 
-                await LogChange("SocialMediaLink", "حذف رابط اجتماعي", $"حذف رابط: {link.Platform}");
+                await LogChange("SocialMediaLink", "حذف رابط اجتماعي", $"حذف رابط: {link.Platform}", oldValues, null, link.Id);
 
                 TempData["SuccessMessage"] = "تم حذف الرابط الاجتماعي بنجاح";
             }
