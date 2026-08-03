@@ -1,0 +1,41 @@
+@model List<Himam_main.Models.AuditLog>
+@{
+    ViewData["Title"] = "سجل التعديلات";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">سجل التعديلات</h3>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>الإجراء</th>
+                                <th>التفاصيل</th>
+                                <th>المستخدم</th>
+                                <th>عنوان IP</th>
+                                <th>التاريخ والوقت</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var log in Model)
+                            {
+                                <tr>
+                                    <td>@log.Action</td>
+                                    <td>@log.Details</td>
+                                    <td>@log.User?.Username</td>
+                                    <td>@log.IpAddress</td>
+                                    <td>@log.CreatedAt?.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

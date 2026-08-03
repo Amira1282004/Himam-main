@@ -1,0 +1,86 @@
+@model Himam_main.Models.AboutSection
+@{
+    ViewData["Title"] = "إدارة قسم About";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">إدارة قسم About</h3>
+                </div>
+                <div class="card-body">
+                    <form asp-action="AboutSection" method="post">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" asp-for="Id" />
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Eyebrow" class="control-label">العنوان العلوي</label>
+                            <input asp-for="Eyebrow" class="form-control" />
+                            <span asp-validation-for="Eyebrow" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Title" class="control-label">العنوان الرئيسي</label>
+                            <textarea asp-for="Title" class="form-control" rows="3"></textarea>
+                            <span asp-validation-for="Title" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Description" class="control-label">الوصف</label>
+                            <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="AdditionalDescription" class="control-label">الوصف الإضافي</label>
+                            <textarea asp-for="AdditionalDescription" class="form-control" rows="4"></textarea>
+                            <span asp-validation-for="AdditionalDescription" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="ChairmanName" class="control-label">اسم الرئيس</label>
+                            <input asp-for="ChairmanName" class="form-control" />
+                            <span asp-validation-for="ChairmanName" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="ChairmanTitle" class="control-label">لقب الرئيس</label>
+                            <input asp-for="ChairmanTitle" class="form-control" />
+                            <span asp-validation-for="ChairmanTitle" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="ChairmanImage" class="control-label">صورة الرئيس</label>
+                            <input asp-for="ChairmanImage" class="form-control" />
+                            <span asp-validation-for="ChairmanImage" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <div class="form-check">
+                                <input asp-for="IsVisible" class="form-check-input" />
+                                <label asp-for="IsVisible" class="form-check-label">إظهار القسم</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="SortOrder" class="control-label">الترتيب</label>
+                            <input asp-for="SortOrder" class="form-control" type="number" />
+                            <span asp-validation-for="SortOrder" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">حفظ التغييرات</button>
+                            <a asp-action="Index" asp-controller="Dashboard" class="btn btn-secondary">عودة</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -3,9 +3,10 @@
     ViewData["Description"] = "شركة سعودية متخصصة في صناعة الفعاليات وتطوير البرامج والتجارب المتكاملة للجهات الحكومية والقطاع الخاص والمنظمات غير الربحية.";
     ViewData["Active"] = "index";
 }
+
 @section Styles {
-    <link rel="stylesheet" href="~/css/user/index.css">
-    <link rel="stylesheet" href="~/css/user/splash.css">
+    <link rel="stylesheet" href="~/css/user/index.css" />
+    <link rel="stylesheet" href="~/css/user/splash.css" />
 }
 
 <div id="himamSplash" class="splash-screen" role="presentation" aria-hidden="true">
@@ -232,6 +233,7 @@
     </button>
   </div>
 </section>
+
 <section class="bg-mist">
   <div class="container">
     <div class="head-row reveal">
@@ -268,12 +270,12 @@
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
           </button>
         </div>
-        <a href="@Url.Action("NewsSingle","Home",new{area="User",id=1})" class="news-card-body">
+        <a href="@Url.Action("NewsSingle","Home",new{area="User",id=2})" class="news-card-body">
           <span class="news-date">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
             28 يونيو 2026
           </span>
-          <h3>إطلاق برنامج تدريبي لتنمية القدرات ضمن قطاع التعليم بالشراكة مع جهة تعليمية</h3>
+          <h3>إطلاق برنامج تدريبي لتنمية القدرات في قطاع الفعاليات</h3>
           <span class="news-more">اقرأ المزيد
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
           </span>
@@ -281,24 +283,23 @@
       </div>
 
       <div class="news-card reveal">
-        <div class="news-thumb news-thumb--3" data-video-id="FbsArEsIy0Q" role="button" tabindex="0" aria-label="تشغيل فيديو: توقيع شراكة استراتيجية مع إحدى الجهات الحكومية">
-          <img src="https://img.youtube.com/vi/FbsArEsIy0Q/hqdefault.jpg" alt="" loading="lazy">
+        <div class="news-thumb news-thumb--3" data-video-id="D8sKqJ8xjvM" role="button" tabindex="0" aria-label="تشغيل فيديو: توقيع شراكة استراتيجية">
+          <img src="https://img.youtube.com/vi/D8sKqJ8xjvM/hqdefault.jpg" alt="" loading="lazy">
           <button type="button" class="news-play" aria-hidden="true" tabindex="-1">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
           </button>
         </div>
-        <a href="@Url.Action("NewsSingle","Home",new{area="User",id=1})" class="news-card-body">
+        <a href="@Url.Action("NewsSingle","Home",new{area="User",id=3})" class="news-card-body">
           <span class="news-date">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
             15 يونيو 2026
           </span>
-          <h3>توقيع شراكة استراتيجية مع إحدى الجهات الحكومية لتطوير فعالية وطنية</h3>
+          <h3>توقيع شراكة استراتيجية مع قطاع السياحة والضيافة</h3>
           <span class="news-more">اقرأ المزيد
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
           </span>
         </a>
       </div>
-
     </div>
   </div>
 </section>
@@ -308,7 +309,7 @@
     <div class="event-head reveal">
       <div class="eyebrow">الحدث الأكبر القادم</div>
     </div>
-    <div class="video-embed reveal" data-video-id="CO_EE1X9Oh4" role="button" tabindex="0" 
+    <div class="video-embed reveal" data-video-id="CO_EE1X9Oh4" role="button" tabindex="0">
       <img src="https://img.youtube.com/vi/CO_EE1X9Oh4/hqdefault.jpg" alt="" loading="lazy">
       <button type="button" class="video-embed-play" aria-hidden="true" tabindex="-1">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
@@ -316,41 +317,25 @@
     </div>
   </div>
 </section>
- 
 
 <section class="bg-mist section-sm">
   <div class="container">
     <div class="head-row reveal">
       <h2>شركاؤنا</h2>
     </div>
-    <div class="partners-marquee reveal">
-      <div class="logo-grid">
-        <div class="logo-tile"><img src="~/assets/partners/partners/royal-commission-makkah.svg" alt="الهيئة الملكية لمدينة مكة المكرمة والمشاعر المقدسة" loading="lazy"></div>
-        <div class="logo-tile"><img src="~/assets/partners/partners/isdb.svg" alt="البنك الإسلامي للتنمية" loading="lazy"></div>
-        <div class="logo-tile"><img src="~/assets/partners/partners/ministry-sports.svg" alt="وزارة الرياضة" loading="lazy"></div>
-        <div class="logo-tile"><img src="~/assets/partners/partners/ministry-hrsd.svg" alt="وزارة الموارد البشرية والتنمية الاجتماعية" loading="lazy"></div>
-        <div class="logo-tile"><img src="~/assets/partners/partners/saudi-fund-development.svg" alt="الصندوق السعودي للتنمية" loading="lazy"></div>
-        <div class="logo-tile"><img src="~/assets/partners/partners/national-development-fund.svg" alt="صندوق التنمية الوطني" loading="lazy"></div>
-        <div class="logo-tile"><img src="~/assets/partners/partners/hrdf.svg" alt="صندوق تنمية الموارد البشرية" loading="lazy"></div>
-        <div class="logo-tile"><img src="~/assets/partners/partners/jeddah-municipality.svg" alt="أمانة جدة" loading="lazy"></div>
-        <div class="logo-tile"><img src="~/assets/partners/partners/historic-jeddah.svg" alt="جدة التاريخية" loading="lazy"></div>
-        <div class="logo-tile"><img src="~/assets/partners/partners/real-estate-authority.svg" alt="الهيئة العامة للعقار" loading="lazy"></div>
-        <div class="logo-tile"><img src="~/assets/partners/partners/charitable-associations-council.svg" alt="مجلس الجمعيات الأهلية" loading="lazy"></div>
-        <div class="logo-tile"><img src="~/assets/partners/partners/makkah-newspaper.svg" alt="صحيفة مكة" loading="lazy"></div>
-        <!-- duplicated set for a seamless infinite loop -->
-        <div class="logo-tile" aria-hidden="true"><img src="~/assets/partners/partners/royal-commission-makkah.svg" alt="" loading="lazy"></div>
-        <div class="logo-tile" aria-hidden="true"><img src="~/assets/partners/partners/isdb.svg" alt="" loading="lazy"></div>
-        <div class="logo-tile" aria-hidden="true"><img src="~/assets/partners/partners/ministry-sports.svg" alt="" loading="lazy"></div>
-        <div class="logo-tile" aria-hidden="true"><img src="~/assets/partners/partners/ministry-hrsd.svg" alt="" loading="lazy"></div>
-        <div class="logo-tile" aria-hidden="true"><img src="~/assets/partners/partners/saudi-fund-development.svg" alt="" loading="lazy"></div>
-        <div class="logo-tile" aria-hidden="true"><img src="~/assets/partners/partners/national-development-fund.svg" alt="" loading="lazy"></div>
-        <div class="logo-tile" aria-hidden="true"><img src="~/assets/partners/partners/hrdf.svg" alt="" loading="lazy"></div>
-        <div class="logo-tile" aria-hidden="true"><img src="~/assets/partners/partners/jeddah-municipality.svg" alt="" loading="lazy"></div>
-        <div class="logo-tile" aria-hidden="true"><img src="~/assets/partners/partners/historic-jeddah.svg" alt="" loading="lazy"></div>
-        <div class="logo-tile" aria-hidden="true"><img src="~/assets/partners/partners/real-estate-authority.svg" alt="" loading="lazy"></div>
-        <div class="logo-tile" aria-hidden="true"><img src="~/assets/partners/partners/charitable-associations-council.svg" alt="" loading="lazy"></div>
-        <div class="logo-tile" aria-hidden="true"><img src="~/assets/partners/partners/makkah-newspaper.svg" alt="" loading="lazy"></div>
-      </div>
+    <div class="logo-grid reveal">
+      <div class="logo-tile"><img src="~/assets/partners/partners/royal-commission-makkah.svg" alt="الهيئة الملكية لمدينة مكة المكرمة والمشاعر المقدسة" loading="lazy"></div>
+      <div class="logo-tile"><img src="~/assets/partners/partners/isdb.svg" alt="البنك الإسلامي للتنمية" loading="lazy"></div>
+      <div class="logo-tile"><img src="~/assets/partners/partners/ministry-sports.svg" alt="وزارة الرياضة" loading="lazy"></div>
+      <div class="logo-tile"><img src="~/assets/partners/partners/ministry-hrsd.svg" alt="وزارة الموارد البشرية والتنمية الاجتماعية" loading="lazy"></div>
+      <div class="logo-tile"><img src="~/assets/partners/partners/saudi-fund-development.svg" alt="الصندوق السعودي للتنمية" loading="lazy"></div>
+      <div class="logo-tile"><img src="~/assets/partners/partners/national-development-fund.svg" alt="صندوق التنمية الوطني" loading="lazy"></div>
+      <div class="logo-tile"><img src="~/assets/partners/partners/hrdf.svg" alt="صندوق تنمية الموارد البشرية" loading="lazy"></div>
+      <div class="logo-tile"><img src="~/assets/partners/partners/jeddah-municipality.svg" alt="أمانة جدة" loading="lazy"></div>
+      <div class="logo-tile"><img src="~/assets/partners/partners/historic-jeddah.svg" alt="جدة التاريخية" loading="lazy"></div>
+      <div class="logo-tile"><img src="~/assets/partners/partners/real-estate-authority.svg" alt="الهيئة العامة للعقار" loading="lazy"></div>
+      <div class="logo-tile"><img src="~/assets/partners/partners/charitable-associations-council.svg" alt="مجلس الجمعيات الأهلية" loading="lazy"></div>
+      <div class="logo-tile"><img src="~/assets/partners/partners/makkah-newspaper.svg" alt="صحيفة مكة" loading="lazy"></div>
     </div>
   </div>
 </section>
@@ -394,13 +379,12 @@
   </div>
 </section>
 
-
 <section class="section-sm">
   <div class="container">
     <div class="cta-band reveal">
       <div>
-        <h2>لديك هدف تريد تحويله إلى تجربة؟</h2>
-        <p>لنتحدث عن مشروعك القادم، ونبني معًا مفهومًا قابلًا للتنفيذ والقياس.</p>
+        <h2>هل تريد التعرف على فريق العمل؟</h2>
+        <p>تواصل معنا لنناقش تفاصيل مشروعك ونبني معًا خطة تنفيذ واضحة.</p>
       </div>
       <a href="@Url.Action("Contact","Home",new{area="User"})" class="btn btn-ghost-light">تواصل معنا
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>

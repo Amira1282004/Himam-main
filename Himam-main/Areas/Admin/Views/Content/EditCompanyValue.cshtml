@@ -1,0 +1,56 @@
+@model Himam_main.Models.CompanyValue
+@{
+    ViewData["Title"] = "تعديل قيمة";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">تعديل قيمة</h3>
+                </div>
+                <div class="card-body">
+                    <form asp-action="EditCompanyValue" method="post">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" asp-for="Id" />
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Title" class="control-label">العنوان</label>
+                            <input asp-for="Title" class="form-control" />
+                            <span asp-validation-for="Title" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Content" class="control-label">المحتوى</label>
+                            <textarea asp-for="Content" class="form-control" rows="5"></textarea>
+                            <span asp-validation-for="Content" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <div class="form-check">
+                                <input asp-for="IsVisible" class="form-check-input" />
+                                <label asp-for="IsVisible" class="form-check-label">إظهار القيمة</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="SortOrder" class="control-label">الترتيب</label>
+                            <input asp-for="SortOrder" class="form-control" type="number" />
+                            <span asp-validation-for="SortOrder" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">حفظ التغييرات</button>
+                            <a asp-action="CompanyValues" class="btn btn-secondary">إلغاء</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

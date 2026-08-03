@@ -44,6 +44,22 @@ public partial class HimanAlhayahContext : DbContext
 
     public virtual DbSet<User> Users { get; set; }
 
+    public virtual DbSet<HeroSection> HeroSections { get; set; }
+
+    public virtual DbSet<AboutSection> AboutSections { get; set; }
+
+    public virtual DbSet<Sector> Sectors { get; set; }
+
+    public virtual DbSet<CompanyValue> CompanyValues { get; set; }
+
+    public virtual DbSet<ProcessStep> ProcessSteps { get; set; }
+
+    public virtual DbSet<ContactInfo> ContactInfos { get; set; }
+
+    public virtual DbSet<SocialMediaLink> SocialMediaLinks { get; set; }
+
+    public virtual DbSet<StatItem> StatItems { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.UseCollation("SQL_Latin1_General_CP1_CI_AS");
@@ -240,10 +256,15 @@ public partial class HimanAlhayahContext : DbContext
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
+            entity.Property(e => e.Image).HasMaxLength(500);
             entity.Property(e => e.Title).HasMaxLength(255);
             entity.Property(e => e.UpdatedAt)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
+
+            entity.HasOne(d => d.User).WithMany()
+                .HasForeignKey(d => d.UserId)
+                .HasConstraintName("FK_ServiceCategories_Users");
         });
 
         modelBuilder.Entity<Setting>(entity =>
@@ -285,6 +306,10 @@ public partial class HimanAlhayahContext : DbContext
             entity.Property(e => e.Name).HasMaxLength(100);
             entity.Property(e => e.Position).HasMaxLength(100);
             entity.Property(e => e.SortOrder).HasDefaultValue(0);
+
+            entity.HasOne(d => d.User).WithMany()
+                .HasForeignKey(d => d.UserId)
+                .HasConstraintName("FK_TeamMembers_Users");
         });
 
         modelBuilder.Entity<Testimonial>(entity =>
@@ -327,6 +352,164 @@ public partial class HimanAlhayahContext : DbContext
                         j.HasKey("UserId", "RoleId");
                         j.ToTable("UserRoles");
                     });
+        });
+
+        modelBuilder.Entity<HeroSection>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__HeroSections__3214EC07AA5B1B4C");
+
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.CtaLink).HasMaxLength(500);
+            entity.Property(e => e.CtaText).HasMaxLength(255);
+            entity.Property(e => e.Subtitle).HasMaxLength(500);
+            entity.Property(e => e.Title).HasMaxLength(255);
+            entity.Property(e => e.UpdatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.YoutubeVideoId).HasMaxLength(100);
+
+            entity.HasOne(d => d.User).WithMany()
+                .HasForeignKey(d => d.UserId)
+                .HasConstraintName("FK_HeroSections_Users");
+        });
+
+        modelBuilder.Entity<AboutSection>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__AboutSections__3214EC07A5545B4E");
+
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.ChairmanImage).HasMaxLength(500);
+            entity.Property(e => e.ChairmanName).HasMaxLength(100);
+            entity.Property(e => e.ChairmanTitle).HasMaxLength(100);
+            entity.Property(e => e.Description).HasMaxLength(1000);
+            entity.Property(e => e.Eyebrow).HasMaxLength(100);
+            entity.Property(e => e.Title).HasMaxLength(255);
+            entity.Property(e => e.UpdatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+
+            entity.HasOne(d => d.User).WithMany()
+                .HasForeignKey(d => d.UserId)
+                .HasConstraintName("FK_AboutSections_Users");
+        });
+
+        modelBuilder.Entity<Sector>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Sectors__3214EC07C2C85624");
+
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Description).HasMaxLength(1000);
+            entity.Property(e => e.Image).HasMaxLength(500);
+            entity.Property(e => e.Title).HasMaxLength(255);
+            entity.Property(e => e.UpdatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+
+            entity.HasOne(d => d.User).WithMany()
+                .HasForeignKey(d => d.UserId)
+                .HasConstraintName("FK_Sectors_Users");
+        });
+
+        modelBuilder.Entity<CompanyValue>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__CompanyValues__3214EC07E6C337E4");
+
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Content).HasMaxLength(1000);
+            entity.Property(e => e.Title).HasMaxLength(255);
+            entity.Property(e => e.UpdatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+
+            entity.HasOne(d => d.User).WithMany()
+                .HasForeignKey(d => d.UserId)
+                .HasConstraintName("FK_CompanyValues_Users");
+        });
+
+        modelBuilder.Entity<ProcessStep>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__ProcessSteps__3214EC072C9D1A93");
+
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.StepNumber).HasDefaultValue(0);
+            entity.Property(e => e.Subtitle).HasMaxLength(255);
+            entity.Property(e => e.Title).HasMaxLength(255);
+            entity.Property(e => e.UpdatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+
+            entity.HasOne(d => d.User).WithMany()
+                .HasForeignKey(d => d.UserId)
+                .HasConstraintName("FK_ProcessSteps_Users");
+        });
+
+        modelBuilder.Entity<ContactInfo>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__ContactInfos__3214EC07DF95702A");
+
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Address).HasMaxLength(500);
+            entity.Property(e => e.Email).HasMaxLength(150);
+            entity.Property(e => e.MapEmbedUrl).HasMaxLength(1000);
+            entity.Property(e => e.Phone).HasMaxLength(50);
+            entity.Property(e => e.UpdatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.WorkingHours).HasMaxLength(100);
+
+            entity.HasOne(d => d.User).WithMany()
+                .HasForeignKey(d => d.UserId)
+                .HasConstraintName("FK_ContactInfos_Users");
+        });
+
+        modelBuilder.Entity<SocialMediaLink>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__SocialMediaLinks__3214EC07E853A1DE");
+
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.IconSvg).HasMaxLength(2000);
+            entity.Property(e => e.Platform).HasMaxLength(50);
+            entity.Property(e => e.Url).HasMaxLength(500);
+            entity.Property(e => e.UpdatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+
+            entity.HasOne(d => d.User).WithMany()
+                .HasForeignKey(d => d.UserId)
+                .HasConstraintName("FK_SocialMediaLinks_Users");
+        });
+
+        modelBuilder.Entity<StatItem>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__StatItems__3214EC07781EF791");
+
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Description).HasMaxLength(500);
+            entity.Property(e => e.Title).HasMaxLength(255);
+            entity.Property(e => e.UpdatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Value).HasMaxLength(100);
+
+            entity.HasOne(d => d.User).WithMany()
+                .HasForeignKey(d => d.UserId)
+                .HasConstraintName("FK_StatItems_Users");
         });
 
         OnModelCreatingPartial(modelBuilder);

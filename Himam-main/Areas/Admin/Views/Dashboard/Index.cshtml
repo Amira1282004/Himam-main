@@ -1,7 +1,19 @@
+@model Himam_main.Models.ViewModels.DashboardViewModel
 @{
     ViewData["Title"] = "لوحة تحكم المدير الأعلى";
     ViewData["Description"] = "لوحة تحكم المدير الأعلى في همم الحياة: إدارة المستخدمين والصلاحيات والإعدادات والسجلات الأمنية والتكاملات.";
     Layout = "_DashboardLayout";
+
+    var superCount = Model.UsersByRole.GetValueOrDefault("Super Admin", 0);
+    var managerCount = Model.UsersByRole.GetValueOrDefault("Site Manager", 0);
+    var editorCount = Model.UsersByRole.GetValueOrDefault("Content Editor", 0);
+    var supportCount = Model.UsersByRole.GetValueOrDefault("Customer Service", 0);
+    var totalForChart = Math.Max(Model.TotalUsers, 1);
+    var superPct = superCount * 100.0 / totalForChart;
+    var managerPct = managerCount * 100.0 / totalForChart;
+    var editorPct = editorCount * 100.0 / totalForChart;
+    var supportPct = supportCount * 100.0 / totalForChart;
+    var chartGradient = $"conic-gradient(var(--purple) 0% {superPct:F1}%, var(--turquoise) {superPct:F1}% {superPct + managerPct:F1}%, var(--gold) {superPct + managerPct:F1}% {superPct + managerPct + editorPct:F1}%, var(--charcoal) {superPct + managerPct + editorPct:F1}% 100%)";
 }
 
 
@@ -14,14 +26,14 @@
               <span class="kpi-trend up">+3 هذا الشهر</span>
             </div>
             <div class="kpi-chart-row">
-              <div class="donut" style="background:conic-gradient(var(--purple) 0% 8.3%, var(--turquoise) 8.3% 25%, var(--gold) 25% 66.7%, var(--charcoal) 66.7% 100%);">
-                <span class="donut-label">12</span>
+              <div class="donut" style="background:@chartGradient;">
+                <span class="donut-label">@Model.TotalUsers</span>
               </div>
               <div class="kpi-legend">
-                <span><i style="background:var(--purple);"></i>مدير أعلى 1</span>
-                <span><i style="background:var(--turquoise);"></i>مدير موقع 2</span>
-                <span><i style="background:var(--gold);"></i>محرر محتوى 5</span>
-                <span><i style="background:var(--charcoal);"></i>خدمة عملاء 4</span>
+                <span><i style="background:var(--purple);"></i>مدير أعلى @superCount</span>
+                <span><i style="background:var(--turquoise);"></i>مدير موقع @managerCount</span>
+                <span><i style="background:var(--gold);"></i>محرر محتوى @editorCount</span>
+                <span><i style="background:var(--charcoal);"></i>خدمة عملاء @supportCount</span>
               </div>
             </div>
             <div class="kpi-label">مستخدمو لوحة التحكم حسب الدور</div>
@@ -350,65 +362,56 @@
             </button>
           </div>
           <div class="chip-row" style="margin-bottom:18px;">
-            <button class="chip active">الكل (12)</button>
-            <button class="chip">المدير الأعلى (1)</button>
-            <button class="chip">مدير الموقع (2)</button>
-            <button class="chip">محرر المحتوى (5)</button>
-            <button class="chip">خدمة العملاء (4)</button>
+            <button class="chip active">الكل (@Model.TotalUsers)</button>
+            <button class="chip">المدير الأعلى (@superCount)</button>
+            <button class="chip">مدير الموقع (@managerCount)</button>
+            <button class="chip">محرر المحتوى (@editorCount)</button>
+            <button class="chip">خدمة العملاء (@supportCount)</button>
           </div>
           <div class="dash-table-wrap">
             <table class="dash-table">
               <thead>
-                <tr><th>المستخدم</th><th>الدور</th><th>الحالة</th><th>آخر دخول</th><th></th></tr>
+                <tr><th>المستخدم</th><th>الدور</th><th>الحالة</th><th>تاريخ الإنشاء</th><th></th></tr>
               </thead>
               <tbody>
-                <tr>
-                  <td><div class="cell-user"><span class="avatar" style="background:var(--purple);">RS</span><div><div class="name">ريم الشهراني</div><div class="email">reem@@himamalhayah.sa</div></div></div></td>
-                  <td><span class="role-badge role-super">المدير الأعلى</span></td>
-                  <td><span class="status-badge status-active">نشط</span></td>
-                  <td>قبل 5 دقائق</td>
-                  <td><div class="row-actions"><button class="icon-action" disabled title="لا يمكن حذف المدير الأعلى"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6h14z"/></svg></button></div></td>
-                </tr>
-                <tr>
-                  <td><div class="cell-user"><span class="avatar" style="background:var(--turquoise-600);">فع</span><div><div class="name">فيصل العتيبي</div><div class="email">faisal@@himamalhayah.sa</div></div></div></td>
-                  <td><span class="role-badge role-manager">مدير الموقع</span></td>
-                  <td><span class="status-badge status-active">نشط</span></td>
-                  <td>قبل ساعتين</td>
-                  <td><div class="row-actions">
-                    <button class="icon-action" title="تعديل"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg></button>
-                    <button class="icon-action danger" title="حذف"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6h14z"/></svg></button>
-                  </div></td>
-                </tr>
-                <tr>
-                  <td><div class="cell-user"><span class="avatar" style="background:var(--gold);">سق</span><div><div class="name">سارة القحطاني</div><div class="email">sarah@@himamalhayah.sa</div></div></div></td>
-                  <td><span class="role-badge role-editor">محرر المحتوى</span></td>
-                  <td><span class="status-badge status-active">نشط</span></td>
-                  <td>قبل 20 دقيقة</td>
-                  <td><div class="row-actions">
-                    <button class="icon-action" title="تعديل"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg></button>
-                    <button class="icon-action danger" title="حذف"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6h14z"/></svg></button>
-                  </div></td>
-                </tr>
-                <tr>
-                  <td><div class="cell-user"><span class="avatar" style="background:var(--charcoal);">نم</span><div><div class="name">نورة المطيري</div><div class="email">noura@@himamalhayah.sa</div></div></div></td>
-                  <td><span class="role-badge role-support">خدمة العملاء</span></td>
-                  <td><span class="status-badge status-pending">بانتظار التفعيل</span></td>
-                  <td>—</td>
-                  <td><div class="row-actions">
-                    <button class="icon-action" title="تعديل"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg></button>
-                    <button class="icon-action danger" title="حذف"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6h14z"/></svg></button>
-                  </div></td>
-                </tr>
-                <tr>
-                  <td><div class="cell-user"><span class="avatar" style="background:var(--charcoal);">خع</span><div><div class="name">خالد العمري</div><div class="email">khalid@@himamalhayah.sa</div></div></div></td>
-                  <td><span class="role-badge role-support">خدمة العملاء</span></td>
-                  <td><span class="status-badge status-suspended">موقوف</span></td>
-                  <td>قبل 12 يومًا</td>
-                  <td><div class="row-actions">
-                    <button class="icon-action" title="تعديل"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg></button>
-                    <button class="icon-action danger" title="حذف"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6h14z"/></svg></button>
-                  </div></td>
-                </tr>
+                @foreach (var user in Model.Users)
+                {
+                  var avatarColor = user.RoleBadgeClass switch
+                  {
+                    "role-super" => "var(--purple)",
+                    "role-manager" => "var(--turquoise-600)",
+                    "role-editor" => "var(--gold)",
+                    _ => "var(--charcoal)"
+                  };
+                  <tr>
+                    <td>
+                      <div class="cell-user">
+                        <span class="avatar" style="background:@avatarColor;">@user.Initials</span>
+                        <div>
+                          <div class="name">@user.Username</div>
+                          <div class="email">@user.Email</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td><span class="role-badge @user.RoleBadgeClass">@user.RoleNameAr</span></td>
+                    <td><span class="status-badge status-active">نشط</span></td>
+                    <td>@(user.CreatedAt?.ToString("dd MMMM yyyy", new System.Globalization.CultureInfo("ar-SA")) ?? "—")</td>
+                    <td>
+                      <div class="row-actions">
+                        @if (user.IsCurrentUser)
+                        {
+                          <button type="button" class="icon-action profile-trigger" title="تعديل الملف الشخصي">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>
+                          </button>
+                          @if (user.RoleName == "Super Admin")
+                          {
+                            <button class="icon-action" disabled title="لا يمكن حذف المدير الأعلى"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6h14z"/></svg></button>
+                          }
+                        }
+                      </div>
+                    </td>
+                  </tr>
+                }
               </tbody>
             </table>
           </div>
@@ -471,24 +474,21 @@
               <table class="dash-table">
                 <thead><tr><th>المستخدم</th><th>الدور</th><th>تاريخ الإنشاء</th><th></th></tr></thead>
                 <tbody>
-                  <tr>
-                    <td><div class="cell-user"><span class="avatar" style="background:var(--purple);">RS</span><div><div class="name">ريم الشهراني</div><div class="email">reem@@himamalhayah.sa</div></div></div></td>
-                    <td><span class="role-badge role-super">المدير الأعلى</span></td>
-                    <td>14 يناير 2025</td>
-                    <td><button class="icon-action" disabled title="لا يمكن حذف المدير الأعلى"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6h14z"/></svg></button></td>
-                  </tr>
-                  <tr>
-                    <td><div class="cell-user"><span class="avatar" style="background:var(--turquoise-600);">فع</span><div><div class="name">فيصل العتيبي</div><div class="email">faisal@@himamalhayah.sa</div></div></div></td>
-                    <td><span class="role-badge role-manager">مدير الموقع</span></td>
-                    <td>02 مارس 2025</td>
-                    <td><button class="icon-action danger" title="حذف الحساب"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6h14z"/></svg></button></td>
-                  </tr>
-                  <tr>
-                    <td><div class="cell-user"><span class="avatar" style="background:var(--turquoise-600);">لح</span><div><div class="name">لينا الحربي</div><div class="email">lina@@himamalhayah.sa</div></div></div></td>
-                    <td><span class="role-badge role-manager">مدير الموقع</span></td>
-                    <td>19 يونيو 2025</td>
-                    <td><button class="icon-action danger" title="حذف الحساب"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6h14z"/></svg></button></td>
-                  </tr>
+                  @foreach (var user in Model.Users.Where(u => u.RoleName is "Super Admin" or "Site Manager"))
+                  {
+                    var avatarColor = user.RoleBadgeClass == "role-super" ? "var(--purple)" : "var(--turquoise-600)";
+                    <tr>
+                      <td><div class="cell-user"><span class="avatar" style="background:@avatarColor;">@user.Initials</span><div><div class="name">@user.Username</div><div class="email">@user.Email</div></div></div></td>
+                      <td><span class="role-badge @user.RoleBadgeClass">@user.RoleNameAr</span></td>
+                      <td>@(user.CreatedAt?.ToString("dd MMMM yyyy", new System.Globalization.CultureInfo("ar-SA")) ?? "—")</td>
+                      <td>
+                        @if (user.RoleName == "Super Admin")
+                        {
+                          <button class="icon-action" disabled title="لا يمكن حذف المدير الأعلى"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6h14z"/></svg></button>
+                        }
+                      </td>
+                    </tr>
+                  }
                 </tbody>
               </table>
             </div>

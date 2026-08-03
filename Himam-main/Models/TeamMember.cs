@@ -22,4 +22,8 @@ public partial class TeamMember
     public int? SortOrder { get; set; }
 
     public DateTime? CreatedAt { get; set; }
+
+    public int? UserId { get; set; }
+
+    public virtual User? User { get; set; }
 }

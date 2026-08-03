@@ -1,0 +1,82 @@
+@model Himam_main.Models.HeroSection
+@{
+    ViewData["Title"] = "إدارة قسم Hero";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">إدارة قسم Hero</h3>
+                </div>
+                <div class="card-body">
+                    <form asp-action="HeroSection" method="post">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" asp-for="Id" />
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Title" class="control-label">العنوان الرئيسي</label>
+                            <input asp-for="Title" class="form-control" />
+                            <span asp-validation-for="Title" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Subtitle" class="control-label">العنوان الفرعي</label>
+                            <input asp-for="Subtitle" class="form-control" />
+                            <span asp-validation-for="Subtitle" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="CtaText" class="control-label">نص الزر</label>
+                            <input asp-for="CtaText" class="form-control" />
+                            <span asp-validation-for="CtaText" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="CtaLink" class="control-label">رابط الزر</label>
+                            <input asp-for="CtaLink" class="form-control" />
+                            <span asp-validation-for="CtaLink" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="YoutubeVideoId" class="control-label">معرف فيديو يوتيوب</label>
+                            <input asp-for="YoutubeVideoId" class="form-control" placeholder="مثال: c8bBHCEI9AE" />
+                            <span asp-validation-for="YoutubeVideoId" class="text-danger"></span>
+                            <small class="text-muted">المعرف موجود في رابط الفيديو بعد ?v=</small>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <div class="form-check">
+                                <input asp-for="IsVideoEnabled" class="form-check-input" />
+                                <label asp-for="IsVideoEnabled" class="form-check-label">تفعيل الفيديو</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <div class="form-check">
+                                <input asp-for="IsVisible" class="form-check-input" />
+                                <label asp-for="IsVisible" class="form-check-label">إظهار القسم</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="SortOrder" class="control-label">الترتيب</label>
+                            <input asp-for="SortOrder" class="form-control" type="number" />
+                            <span asp-validation-for="SortOrder" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">حفظ التغييرات</button>
+                            <a asp-action="Index" asp-controller="Dashboard" class="btn btn-secondary">عودة</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

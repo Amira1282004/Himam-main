@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace Himam.Areas.User.Controllers
+namespace Himam_main.Areas.User.Controllers
 {
     [Area("User")]
     public class HomeController : Controller

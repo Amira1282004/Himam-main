@@ -1,0 +1,54 @@
+@model Himam_main.Models.SocialMediaLink
+@{
+    ViewData["Title"] = "إضافة رابط اجتماعي جديد";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">إضافة رابط اجتماعي جديد</h3>
+                </div>
+                <div class="card-body">
+                    <form asp-action="CreateSocialMediaLink" method="post">
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Platform" class="control-label">المنصة</label>
+                            <input asp-for="Platform" class="form-control" placeholder="مثال: Facebook, Twitter, Instagram" />
+                            <span asp-validation-for="Platform" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Url" class="control-label">الرابط</label>
+                            <input asp-for="Url" class="form-control" type="url" />
+                            <span asp-validation-for="Url" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="IconSvg" class="control-label">أيقونة SVG</label>
+                            <textarea asp-for="IconSvg" class="form-control" rows="3" placeholder="كود SVG للأيقونة"></textarea>
+                            <span asp-validation-for="IconSvg" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="SortOrder" class="control-label">الترتيب</label>
+                            <input asp-for="SortOrder" class="form-control" type="number" />
+                            <span asp-validation-for="SortOrder" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">حفظ</button>
+                            <a asp-action="SocialMediaLinks" class="btn btn-secondary">إلغاء</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
