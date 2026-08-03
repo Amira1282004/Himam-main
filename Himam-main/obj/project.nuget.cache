@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "F2QnB6tUBbY=",
+  "dgSpecHash": "t8294iEylD0=",
   "success": true,
-  "projectFilePath": "C:\\Users\\pc\\Downloads\\Himam-main\\Himam-main\\Himam-main.csproj",
+  "projectFilePath": "c:\\Users\\pc\\Downloads\\Himam-main\\Himam-main\\Himam-main.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\pc\\.nuget\\packages\\azure.core\\1.47.1\\azure.core.1.47.1.nupkg.sha512",
     "C:\\Users\\pc\\.nuget\\packages\\azure.identity\\1.14.2\\azure.identity.1.14.2.nupkg.sha512",
@@ -141,9 +141,9 @@
       "code": "NU1901",
       "level": "Warning",
       "message": "Package 'NuGet.Packaging' 6.12.1 has a known low severity vulnerability, https://github.com/advisories/GHSA-g4vj-cjjj-v7hg",
-      "projectPath": "C:\\Users\\pc\\Downloads\\Himam-main\\Himam-main\\Himam-main.csproj",
+      "projectPath": "c:\\Users\\pc\\Downloads\\Himam-main\\Himam-main\\Himam-main.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\Users\\pc\\Downloads\\Himam-main\\Himam-main\\Himam-main.csproj",
+      "filePath": "c:\\Users\\pc\\Downloads\\Himam-main\\Himam-main\\Himam-main.csproj",
       "libraryId": "NuGet.Packaging",
       "targetGraphs": [
         "net10.0"
@@ -153,9 +153,9 @@
       "code": "NU1901",
       "level": "Warning",
       "message": "Package 'NuGet.Protocol' 6.12.1 has a known low severity vulnerability, https://github.com/advisories/GHSA-g4vj-cjjj-v7hg",
-      "projectPath": "C:\\Users\\pc\\Downloads\\Himam-main\\Himam-main\\Himam-main.csproj",
+      "projectPath": "c:\\Users\\pc\\Downloads\\Himam-main\\Himam-main\\Himam-main.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\Users\\pc\\Downloads\\Himam-main\\Himam-main\\Himam-main.csproj",
+      "filePath": "c:\\Users\\pc\\Downloads\\Himam-main\\Himam-main\\Himam-main.csproj",
       "libraryId": "NuGet.Protocol",
       "targetGraphs": [
         "net10.0"
