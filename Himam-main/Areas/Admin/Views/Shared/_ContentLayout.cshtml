@@ -1,0 +1,120 @@
+@* Content pages layout: sidebar + topbar. Used by Content/* pages. *@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>@ViewData["Title"] | همم الحياة</title>
+<meta name="description" content="@ViewData["Description"]">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="~/css/dashboard/admin-dashboard.css">
+<script>(function(){try{var t=localStorage.getItem("himam-theme");if(t==="dark"){document.documentElement.setAttribute("data-theme","dark");}}catch(e){}})();</script>
+</head>
+<body>
+
+<div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+<div class="dash-shell">
+
+  <aside class="dash-sidebar" id="dashSidebar">
+    <div class="dash-brand">
+      <img src="~/assets/logo-stacked-trim.png" alt="همم الحياة">
+      <div class="dash-brand-text">لوحة التحكم<span>همم الحياة</span></div>
+    </div>
+
+    <nav class="dash-nav">
+      <div class="dash-nav-group">
+        <div class="dash-nav-label">عام</div>
+        <a asp-area="Admin" asp-controller="Dashboard" asp-action="Index" class="dash-nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="8" rx="2"/><rect x="3" y="13" width="8" height="8" rx="2"/><rect x="13" y="13" width="8" height="8" rx="2"/></svg>
+          نظرة عامة
+        </a>
+      </div>
+
+      <div class="dash-nav-group">
+        <div class="dash-nav-label">المحتوى</div>
+        <a asp-area="Admin" asp-controller="Content" asp-action="HeroSection" class="dash-nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h6M9 9h1"/></svg>
+          قسم Hero
+        </a>
+        <a asp-area="Admin" asp-controller="Content" asp-action="AboutSection" class="dash-nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h6M9 9h1"/></svg>
+          قسم About
+        </a>
+        <a asp-area="Admin" asp-controller="Content" asp-action="Sectors" class="dash-nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h6M9 9h1"/></svg>
+          القطاعات
+        </a>
+        <a asp-area="Admin" asp-controller="Content" asp-action="CompanyValues" class="dash-nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h6M9 9h1"/></svg>
+          قيم الشركة
+        </a>
+        <a asp-area="Admin" asp-controller="Content" asp-action="ProcessSteps" class="dash-nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h6M9 9h1"/></svg>
+          خطوات العملية
+        </a>
+        <a asp-area="Admin" asp-controller="Content" asp-action="StatItems" class="dash-nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h6M9 9h1"/></svg>
+          الإحصائيات
+        </a>
+        <a asp-area="Admin" asp-controller="Content" asp-action="ContactInfo" class="dash-nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h6M9 9h1"/></svg>
+          معلومات التواصل
+        </a>
+        <a asp-area="Admin" asp-controller="Content" asp-action="SocialMediaLinks" class="dash-nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h6M9 9h1"/></svg>
+          روابط التواصل الاجتماعي
+        </a>
+        <a asp-area="Admin" asp-controller="Content" asp-action="AuditLogs" class="dash-nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h6M9 9h1"/></svg>
+          سجل التعديلات
+        </a>
+      </div>
+    </nav>
+
+    <div class="dash-sidebar-foot">
+      <div class="lang-switch" role="group" aria-label="اللغة">
+        <button type="button" class="lang-btn active" data-lang="ar">AR</button>
+        <button type="button" class="lang-btn" data-lang="en">EN</button>
+      </div>
+      <form asp-area="Admin" asp-controller="Account" asp-action="Logout" method="post" style="margin:0;">
+        @Html.AntiForgeryToken()
+        <button type="submit" class="dash-logout">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg>
+          تسجيل الخروج
+        </button>
+      </form>
+    </div>
+  </aside>
+
+  <div class="dash-main">
+    <header class="dash-topbar">
+      <button type="button" class="mobile-toggle" id="mobileSidebarToggle" aria-label="القائمة">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+      </button>
+      <div class="topbar-info">
+        <h1 id="topbarTitle">@ViewData["Title"]</h1>
+        <p id="topbarSub">@ViewData["Description"]</p>
+      </div>
+      <div class="topbar-actions">
+        <button type="button" class="theme-toggle" id="themeToggle" aria-label="تبديل الوضع الليلي/النهاري">
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <main class="dash-content">
+      @RenderBody()
+    </main>
+  </div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/dashboard/admin-dashboard.js"></script>
+@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,4 +1,5 @@
 using Himam_main.Data;
+using Himam_main.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,6 +18,12 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     });
 
 builder.Services.AddControllersWithViews();
+
+// Register HttpContextAccessor
+builder.Services.AddHttpContextAccessor();
+
+// Register Audit Log Service
+builder.Services.AddScoped<IAuditLogService, AuditLogService>();
 
 var app = builder.Build();
 

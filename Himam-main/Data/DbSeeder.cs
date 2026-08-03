@@ -115,7 +115,7 @@ public static class DbSeeder
                 AdditionalDescription = "ولا تنتهي قيمة التجربة بانتهاء تنفيذها، بل تمتد إلى ما تحققه من نتائج، وما تتركه من أثر يمكن قياسه وتطويره والبناء عليه.",
                 ChairmanName = "ظافر الشهراني",
                 ChairmanTitle = "رئيس مجلس الإدارة",
-                ChairmanImage = "~/assets/chairman-dhafer-alshahrani.png",
+                ChairmanImage = "/assets/chairman-dhafer-alshahrani.png",
                 IsVisible = true,
                 SortOrder = 1,
                 CreatedAt = DateTime.Now,
@@ -123,6 +123,16 @@ public static class DbSeeder
                 UserId = user.Id
             });
             await context.SaveChangesAsync();
+        }
+        else
+        {
+            // Fix existing image paths
+            var existingAbout = await context.AboutSections.FirstOrDefaultAsync();
+            if (existingAbout != null && existingAbout.ChairmanImage?.StartsWith("~/") == true)
+            {
+                existingAbout.ChairmanImage = existingAbout.ChairmanImage.Replace("~/", "/");
+                await context.SaveChangesAsync();
+            }
         }
 
         // Seed Sectors
@@ -135,7 +145,7 @@ public static class DbSeeder
                 {
                     Title = "الجهات الحكومية والهيئات",
                     Description = "نطور المبادرات والفعاليات والبرامج والمشروعات التي تدعم الأهداف المؤسسية والمجتمعية وتخدم المستفيدين ضمن تجربة واضحة ومنظمة تراعي الحوكمة وتنوع الجمهور وقابلية قياس النتائج.",
-                    Image = "~/assets/sectors/s1.JPG",
+                    Image = "/assets/sectors/s1.JPG",
                     IsVisible = true,
                     SortOrder = 1,
                     CreatedAt = DateTime.Now,
@@ -146,7 +156,7 @@ public static class DbSeeder
                 {
                     Title = "القطاع الخاص والعلامات التجارية",
                     Description = "نصمم تجارب تساعد الشركات والعلامات التجارية على ترجمة أهدافها ورسائلها إلى تفاعل حقيقي مع العملاء والموظفين والشركاء.",
-                    Image = "~/assets/sectors/s2.jpg",
+                    Image = "/assets/sectors/s2.jpg",
                     IsVisible = true,
                     SortOrder = 2,
                     CreatedAt = DateTime.Now,
@@ -157,7 +167,7 @@ public static class DbSeeder
                 {
                     Title = "القطاع غير الربحي",
                     Description = "نساعد القطاعات غير الربحية على تحويل رسالتها وأهدافها المجتمعية إلى برامج ومبادرات وتجارب تصل للمستفيدين والداعمين والمتطوعين بوضوح، وتدعم المشاركة والاستفادة ضمن الموارد المتاحة.",
-                    Image = "~/assets/sectors/s3.jpg",
+                    Image = "/assets/sectors/s3.jpg",
                     IsVisible = true,
                     SortOrder = 3,
                     CreatedAt = DateTime.Now,
@@ -168,7 +178,7 @@ public static class DbSeeder
                 {
                     Title = "القطاع الترفيهي والثقافي",
                     Description = "نطور فعاليات وتجارب تجمع بين المحتوى والإبداع والتفاعل، وتقدم للجمهور رحلة متماسكة تتناسب مع طبيعة المشروع وسياقه الثقافي والترفيهي.",
-                    Image = "~/assets/sectors/s4.jpeg",
+                    Image = "/assets/sectors/s4.jpeg",
                     IsVisible = true,
                     SortOrder = 4,
                     CreatedAt = DateTime.Now,
@@ -179,7 +189,7 @@ public static class DbSeeder
                 {
                     Title = "القطاع السياحي والضيافة",
                     Description = "نصمم تجارب الزوار والوجهات والبرامج السياحية بما يعزز وضوح الرحلة وجودة التفاعل، ويربط المكان بقصته وهويته وجمهوره المستهدف.",
-                    Image = "~/assets/sectors/s5.jpg",
+                    Image = "/assets/sectors/s5.jpg",
                     IsVisible = true,
                     SortOrder = 5,
                     CreatedAt = DateTime.Now,
@@ -190,7 +200,7 @@ public static class DbSeeder
                 {
                     Title = "القطاع الرياضي",
                     Description = "نطور فعاليات رياضية وتجارب تفاعلية تجمع بين الحماس والتنظيم، وتقدم للجمهور تجارب رياضية نوعية تناسب السياق السعودي.",
-                    Image = "~/assets/sectors/s6.jpg",
+                    Image = "/assets/sectors/s6.jpg",
                     IsVisible = true,
                     SortOrder = 6,
                     CreatedAt = DateTime.Now,
@@ -201,7 +211,7 @@ public static class DbSeeder
                 {
                     Title = "قطاع التعليم وتنمية القدرات",
                     Description = "نصمم برامج تعليمية وتدريبية وتجارب تعليمية تفاعلية تخدم أهداف التنمية وبناء القدرات وفق منهجيات حديثة.",
-                    Image = "~/assets/sectors/s7.jpg",
+                    Image = "/assets/sectors/s7.jpg",
                     IsVisible = true,
                     SortOrder = 7,
                     CreatedAt = DateTime.Now,
@@ -212,7 +222,7 @@ public static class DbSeeder
                 {
                     Title = "الرعاة والشركاء الاستراتيجيون",
                     Description = "نطور شراكات استراتيجية مع الرعاة والشركاء لتعزيز القيمة المتبادلة وتحقيق الأهداف المشتركة ضمن تجارب متكاملة.",
-                    Image = "~/assets/sectors/s8.jpg",
+                    Image = "/assets/sectors/s8.jpg",
                     IsVisible = true,
                     SortOrder = 8,
                     CreatedAt = DateTime.Now,
@@ -223,7 +233,7 @@ public static class DbSeeder
                 {
                     Title = "قطاع الاستثمار",
                     Description = "نطور فرص استثمارية في قطاع الفعاليات والتجارب الترفيهية بما يدعم نمو القطاع وتحقيق عوائد مالية مستدامة.",
-                    Image = "~/assets/sectors/s9.jpg",
+                    Image = "/assets/sectors/s9.jpg",
                     IsVisible = true,
                     SortOrder = 9,
                     CreatedAt = DateTime.Now,
@@ -232,6 +242,19 @@ public static class DbSeeder
                 }
             };
             context.Sectors.AddRange(sectors);
+            await context.SaveChangesAsync();
+        }
+        else
+        {
+            // Fix existing image paths
+            var existingSectors = await context.Sectors.Where(s => s.Image != null && s.Image.StartsWith("~/")).ToListAsync();
+            foreach (var sector in existingSectors)
+            {
+                if (sector.Image != null)
+                {
+                    sector.Image = sector.Image.Replace("~/", "/");
+                }
+            }
             await context.SaveChangesAsync();
         }
 
