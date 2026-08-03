@@ -670,6 +670,266 @@ namespace Himam_main.Areas.Admin.Controllers
             return RedirectToAction(nameof(SocialMediaLinks));
         }
 
+        // Process Steps Management
+        public async Task<IActionResult> ProcessSteps()
+        {
+            var steps = await _context.ProcessSteps
+                .Include(p => p.User)
+                .OrderBy(p => p.SortOrder)
+                .ToListAsync();
+
+            return View(steps);
+        }
+
+        public async Task<IActionResult> CreateProcessStep()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateProcessStep(ProcessStep model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+            model.CreatedAt = DateTime.Now;
+            model.UpdatedAt = DateTime.Now;
+            model.UserId = userId;
+            model.IsVisible = true;
+
+            _context.ProcessSteps.Add(model);
+            await _context.SaveChangesAsync();
+
+            var newValues = new
+            {
+                model.Title,
+                model.Subtitle,
+                model.StepNumber,
+                model.IsVisible,
+                model.SortOrder
+            };
+
+            await LogChange("ProcessStep", "إنشاء خطوة جديدة", $"إنشاء خطوة: {model.Title}", null, newValues, model.Id);
+
+            TempData["SuccessMessage"] = "تم إنشاء الخطوة بنجاح";
+            return RedirectToAction(nameof(ProcessSteps));
+        }
+
+        public async Task<IActionResult> EditProcessStep(int id)
+        {
+            var step = await _context.ProcessSteps.FindAsync(id);
+            if (step == null)
+                return NotFound();
+
+            return View(step);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditProcessStep(ProcessStep model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+            var existing = await _context.ProcessSteps.FindAsync(model.Id);
+
+            if (existing != null)
+            {
+                var oldValues = new
+                {
+                    existing.Title,
+                    existing.Subtitle,
+                    existing.StepNumber,
+                    existing.IsVisible,
+                    existing.SortOrder
+                };
+
+                existing.Title = model.Title;
+                existing.Subtitle = model.Subtitle;
+                existing.StepNumber = model.StepNumber;
+                existing.IsVisible = model.IsVisible;
+                existing.SortOrder = model.SortOrder;
+                existing.UpdatedAt = DateTime.Now;
+                existing.UserId = userId;
+
+                var newValues = new
+                {
+                    model.Title,
+                    model.Subtitle,
+                    model.StepNumber,
+                    model.IsVisible,
+                    model.SortOrder
+                };
+
+                await LogChange("ProcessStep", "تعديل خطوة", $"تعديل خطوة: {model.Title}", oldValues, newValues, model.Id);
+
+                await _context.SaveChangesAsync();
+            }
+
+            TempData["SuccessMessage"] = "تم تحديث الخطوة بنجاح";
+            return RedirectToAction(nameof(ProcessSteps));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteProcessStep(int id)
+        {
+            var step = await _context.ProcessSteps.FindAsync(id);
+            if (step != null)
+            {
+                var oldValues = new
+                {
+                    step.Title,
+                    step.Subtitle,
+                    step.StepNumber,
+                    step.IsVisible,
+                    step.SortOrder
+                };
+
+                _context.ProcessSteps.Remove(step);
+                await _context.SaveChangesAsync();
+
+                await LogChange("ProcessStep", "حذف خطوة", $"حذف خطوة: {step.Title}", oldValues, null, step.Id);
+
+                TempData["SuccessMessage"] = "تم حذف الخطوة بنجاح";
+            }
+
+            return RedirectToAction(nameof(ProcessSteps));
+        }
+
+        // Stat Items Management
+        public async Task<IActionResult> StatItems()
+        {
+            var stats = await _context.StatItems
+                .Include(s => s.User)
+                .OrderBy(s => s.SortOrder)
+                .ToListAsync();
+
+            return View(stats);
+        }
+
+        public async Task<IActionResult> CreateStatItem()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateStatItem(StatItem model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+            model.CreatedAt = DateTime.Now;
+            model.UpdatedAt = DateTime.Now;
+            model.UserId = userId;
+            model.IsVisible = true;
+
+            _context.StatItems.Add(model);
+            await _context.SaveChangesAsync();
+
+            var newValues = new
+            {
+                model.Title,
+                model.Value,
+                model.Description,
+                model.IsVisible,
+                model.SortOrder
+            };
+
+            await LogChange("StatItem", "إنشاء إحصائية جديدة", $"إنشاء إحصائية: {model.Title}", null, newValues, model.Id);
+
+            TempData["SuccessMessage"] = "تم إنشاء الإحصائية بنجاح";
+            return RedirectToAction(nameof(StatItems));
+        }
+
+        public async Task<IActionResult> EditStatItem(int id)
+        {
+            var stat = await _context.StatItems.FindAsync(id);
+            if (stat == null)
+                return NotFound();
+
+            return View(stat);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditStatItem(StatItem model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+            var existing = await _context.StatItems.FindAsync(model.Id);
+
+            if (existing != null)
+            {
+                var oldValues = new
+                {
+                    existing.Title,
+                    existing.Value,
+                    existing.Description,
+                    existing.IsVisible,
+                    existing.SortOrder
+                };
+
+                existing.Title = model.Title;
+                existing.Value = model.Value;
+                existing.Description = model.Description;
+                existing.IsVisible = model.IsVisible;
+                existing.SortOrder = model.SortOrder;
+                existing.UpdatedAt = DateTime.Now;
+                existing.UserId = userId;
+
+                var newValues = new
+                {
+                    model.Title,
+                    model.Value,
+                    model.Description,
+                    model.IsVisible,
+                    model.SortOrder
+                };
+
+                await LogChange("StatItem", "تعديل إحصائية", $"تعديل إحصائية: {model.Title}", oldValues, newValues, model.Id);
+
+                await _context.SaveChangesAsync();
+            }
+
+            TempData["SuccessMessage"] = "تم تحديث الإحصائية بنجاح";
+            return RedirectToAction(nameof(StatItems));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteStatItem(int id)
+        {
+            var stat = await _context.StatItems.FindAsync(id);
+            if (stat != null)
+            {
+                var oldValues = new
+                {
+                    stat.Title,
+                    stat.Value,
+                    stat.Description,
+                    stat.IsVisible,
+                    stat.SortOrder
+                };
+
+                _context.StatItems.Remove(stat);
+                await _context.SaveChangesAsync();
+
+                await LogChange("StatItem", "حذف إحصائية", $"حذف إحصائية: {stat.Title}", oldValues, null, stat.Id);
+
+                TempData["SuccessMessage"] = "تم حذف الإحصائية بنجاح";
+            }
+
+            return RedirectToAction(nameof(StatItems));
+        }
+
         // Audit Log Management
         public async Task<IActionResult> AuditLogs()
         {

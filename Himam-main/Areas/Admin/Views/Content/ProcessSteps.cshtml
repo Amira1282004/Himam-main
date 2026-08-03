@@ -1,0 +1,59 @@
+@model List<Himam_main.Models.ProcessStep>
+@{
+    ViewData["Title"] = "إدارة خطوات العملية";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h3 class="card-title">إدارة خطوات العملية</h3>
+                    <a asp-action="CreateProcessStep" class="btn btn-primary">إضافة خطوة جديدة</a>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>الرقم</th>
+                                <th>العنوان</th>
+                                <th>العنوان الفرعي</th>
+                                <th>الترتيب</th>
+                                <th>الحالة</th>
+                                <th>الإجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var step in Model)
+                            {
+                                <tr>
+                                    <td>@step.StepNumber</td>
+                                    <td>@step.Title</td>
+                                    <td>@step.Subtitle</td>
+                                    <td>@step.SortOrder</td>
+                                    <td>
+                                        @if (step.IsVisible)
+                                        {
+                                            <span class="badge bg-success">مرئي</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-danger">مخفي</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        <a asp-action="EditProcessStep" asp-route-id="@step.Id" class="btn btn-sm btn-info">تعديل</a>
+                                        <form asp-action="DeleteProcessStep" asp-route-id="@step.Id" method="post" style="display:inline;">
+                                            @Html.AntiForgeryToken()
+                                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('هل أنت متأكد من الحذف؟')">حذف</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

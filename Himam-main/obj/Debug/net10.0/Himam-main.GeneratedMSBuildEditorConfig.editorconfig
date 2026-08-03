@@ -67,6 +67,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ29udGVudFxDcmVhdGVDb21wYW55VmFsdWUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/pc/Downloads/Himam-main/Himam-main/Areas/Admin/Views/Content/CreateProcessStep.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ29udGVudFxDcmVhdGVQcm9jZXNzU3RlcC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/pc/Downloads/Himam-main/Himam-main/Areas/Admin/Views/Content/CreateSector.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ29udGVudFxDcmVhdGVTZWN0b3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -75,8 +79,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ29udGVudFxDcmVhdGVTb2NpYWxNZWRpYUxpbmsuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/pc/Downloads/Himam-main/Himam-main/Areas/Admin/Views/Content/CreateStatItem.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ29udGVudFxDcmVhdGVTdGF0SXRlbS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/pc/Downloads/Himam-main/Himam-main/Areas/Admin/Views/Content/EditCompanyValue.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ29udGVudFxFZGl0Q29tcGFueVZhbHVlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/pc/Downloads/Himam-main/Himam-main/Areas/Admin/Views/Content/EditProcessStep.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ29udGVudFxFZGl0UHJvY2Vzc1N0ZXAuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/pc/Downloads/Himam-main/Himam-main/Areas/Admin/Views/Content/EditSector.cshtml]
@@ -87,8 +99,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ29udGVudFxFZGl0U29jaWFsTWVkaWFMaW5rLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/pc/Downloads/Himam-main/Himam-main/Areas/Admin/Views/Content/EditStatItem.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ29udGVudFxFZGl0U3RhdEl0ZW0uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/pc/Downloads/Himam-main/Himam-main/Areas/Admin/Views/Content/HeroSection.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ29udGVudFxIZXJvU2VjdGlvbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/pc/Downloads/Himam-main/Himam-main/Areas/Admin/Views/Content/ProcessSteps.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ29udGVudFxQcm9jZXNzU3RlcHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/pc/Downloads/Himam-main/Himam-main/Areas/Admin/Views/Content/Sectors.cshtml]
@@ -97,6 +117,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/pc/Downloads/Himam-main/Himam-main/Areas/Admin/Views/Content/SocialMediaLinks.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ29udGVudFxTb2NpYWxNZWRpYUxpbmtzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/pc/Downloads/Himam-main/Himam-main/Areas/Admin/Views/Content/StatItems.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ29udGVudFxTdGF0SXRlbXMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/pc/Downloads/Himam-main/Himam-main/Areas/Admin/Views/Dashboard/Index.cshtml]

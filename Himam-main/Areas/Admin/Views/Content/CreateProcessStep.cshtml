@@ -1,0 +1,51 @@
+@model Himam_main.Models.ProcessStep
+@{
+    ViewData["Title"] = "إضافة خطوة جديدة";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">إضافة خطوة جديدة</h3>
+                </div>
+                <div class="card-body">
+                    <form asp-action="CreateProcessStep" method="post">
+                        @Html.AntiForgeryToken()
+                        <div class="form-group mb-3">
+                            <label asp-for="Title" class="control-label">العنوان</label>
+                            <input asp-for="Title" class="form-control" required />
+                            <span asp-validation-for="Title" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label asp-for="Subtitle" class="control-label">العنوان الفرعي</label>
+                            <input asp-for="Subtitle" class="form-control" required />
+                            <span asp-validation-for="Subtitle" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label asp-for="StepNumber" class="control-label">رقم الخطوة</label>
+                            <input asp-for="StepNumber" class="form-control" type="number" required />
+                            <span asp-validation-for="StepNumber" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label asp-for="SortOrder" class="control-label">الترتيب</label>
+                            <input asp-for="SortOrder" class="form-control" type="number" required />
+                            <span asp-validation-for="SortOrder" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-3">
+                            <div class="form-check">
+                                <input asp-for="IsVisible" class="form-check-input" type="checkbox" checked />
+                                <label asp-for="IsVisible" class="form-check-label">مرئي</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">حفظ</button>
+                            <a asp-action="ProcessSteps" class="btn btn-secondary">إلغاء</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

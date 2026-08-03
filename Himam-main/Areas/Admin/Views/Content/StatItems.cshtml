@@ -1,0 +1,59 @@
+@model List<Himam_main.Models.StatItem>
+@{
+    ViewData["Title"] = "إدارة الإحصائيات";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h3 class="card-title">إدارة الإحصائيات</h3>
+                    <a asp-action="CreateStatItem" class="btn btn-primary">إضافة إحصائية جديدة</a>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>العنوان</th>
+                                <th>القيمة</th>
+                                <th>الوصف</th>
+                                <th>الترتيب</th>
+                                <th>الحالة</th>
+                                <th>الإجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var stat in Model)
+                            {
+                                <tr>
+                                    <td>@stat.Title</td>
+                                    <td>@stat.Value</td>
+                                    <td>@(stat.Description?.Length > 100 ? stat.Description.Substring(0, 100) + "..." : stat.Description)</td>
+                                    <td>@stat.SortOrder</td>
+                                    <td>
+                                        @if (stat.IsVisible)
+                                        {
+                                            <span class="badge bg-success">مرئي</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-danger">مخفي</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        <a asp-action="EditStatItem" asp-route-id="@stat.Id" class="btn btn-sm btn-info">تعديل</a>
+                                        <form asp-action="DeleteStatItem" asp-route-id="@stat.Id" method="post" style="display:inline;">
+                                            @Html.AntiForgeryToken()
+                                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('هل أنت متأكد من الحذف؟')">حذف</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
