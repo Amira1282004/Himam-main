@@ -39,7 +39,7 @@ public class AuditLogService : IAuditLogService
         var entry = new AuditLog
         {
             Action = action,
-            UserId = userId,
+            UserId = userId ?? 0,
             Details = JsonSerializer.Serialize(payload),
             IpAddress = GetClientIp(httpContext),
             CreatedAt = DateTime.Now

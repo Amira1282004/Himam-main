@@ -17,6 +17,8 @@ public partial class ContactInfo
 
     public string? MapEmbedUrl { get; set; }
 
+    public int SortOrder { get; set; } = 0;
+
     public bool IsVisible { get; set; } = true;
 
     public DateTime? CreatedAt { get; set; }

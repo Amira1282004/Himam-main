@@ -13,6 +13,14 @@ public partial class User
 
     public string PasswordHash { get; set; } = null!;
 
+    public string? FullName { get; set; }
+
+    public bool IsEmailVerified { get; set; } = false;
+
+    public string? VerificationCode { get; set; }
+
+    public DateTime? VerificationCodeExpires { get; set; }
+
     public DateTime? CreatedAt { get; set; }
 
     public DateTime? UpdatedAt { get; set; }

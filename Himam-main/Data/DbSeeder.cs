@@ -40,10 +40,10 @@ public static class DbSeeder
 
             await context.Database.ExecuteSqlRawAsync(@"
                 SET IDENTITY_INSERT Users ON;
-                INSERT INTO Users (Id, Username, Email, PasswordHash, CreatedAt, UpdatedAt)
-                VALUES (1, {0}, {1}, {2}, GETDATE(), GETDATE());
+                INSERT INTO Users (Id, Username, Email, PasswordHash, FullName, IsEmailVerified, CreatedAt, UpdatedAt)
+                VALUES (1, {0}, {1}, {2}, {3}, 0, GETDATE(), GETDATE());
                 SET IDENTITY_INSERT Users OFF;",
-                "ظافر الشهراني", "seiframadan125@gmail.com", passwordHash);
+                "ظافر الشهراني", "seiframadan125@gmail.com", passwordHash, "ظافر الشهراني");
 
             var user = await context.Users
                 .Include(u => u.Roles)
@@ -51,6 +51,17 @@ public static class DbSeeder
 
             user.Roles.Add(superAdminRole);
             await context.SaveChangesAsync();
+        }
+        else
+        {
+            // Update existing user to have the new fields
+            var existingUser = await context.Users.FirstAsync(u => u.Id == 1);
+            if (string.IsNullOrEmpty(existingUser.FullName))
+            {
+                existingUser.FullName = "ظافر الشهراني";
+                existingUser.IsEmailVerified = true;
+                await context.SaveChangesAsync();
+            }
         }
 
         if (!await context.TeamMembers.AnyAsync())

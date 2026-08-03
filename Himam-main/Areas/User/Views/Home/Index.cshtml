@@ -1,3 +1,4 @@
+@model Himam_main.Models.ViewModels.HomeViewModel
 @{
     ViewData["Title"] = "همم الحياة";
     ViewData["Description"] = "شركة سعودية متخصصة في صناعة الفعاليات وتطوير البرامج والتجارب المتكاملة للجهات الحكومية والقطاع الخاص والمنظمات غير الربحية.";
@@ -20,219 +21,132 @@
 </div>
 <script src="~/js/user/splash.js"></script>
 
-<section class="home-hero">
-  <div class="hero-video-layer" aria-hidden="true">
-    <iframe id="heroYtBg" class="hero-yt-bg"
-      src="https://www.youtube-nocookie.com/embed/c8bBHCEI9AE?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=c8bBHCEI9AE&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&playsinline=1&disablekb=1"
-      title="320 مليون زائر| قصة نجاح الترفيه في المملكة العربية السعودية"
-      frameborder="0" width="100%" height="100%"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      referrerpolicy="strict-origin-when-cross-origin">
-    </iframe>
-    <div class="hero-overlay"></div>
-  </div>
+@if (Model.HeroSection != null && Model.HeroSection.IsVisible)
+{
+    <section class="home-hero">
+      @if (Model.HeroSection.IsVideoEnabled && !string.IsNullOrEmpty(Model.HeroSection.YoutubeVideoId))
+      {
+        <div class="hero-video-layer" aria-hidden="true">
+          <iframe id="heroYtBg" class="hero-yt-bg"
+            src="https://www.youtube-nocookie.com/embed/@Model.HeroSection.YoutubeVideoId?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=@Model.HeroSection.YoutubeVideoId&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&playsinline=1&disablekb=1"
+            title="همم الحياة - فيديو توضيحي"
+            frameborder="0" width="100%" height="100%"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin">
+          </iframe>
+          <div class="hero-overlay"></div>
+        </div>
+      }
 
-  <div class="container home-hero-inner">
-    <div class="eyebrow-1">صناعة الفعاليات وتطوير التجارب</div>
-    <h1>نصنع تجارب ترفيهية لأن جودة الحياة حق للجميع</h1>
+      <div class="container home-hero-inner">
+        @if (!string.IsNullOrEmpty(Model.HeroSection.Subtitle))
+        {
+            <div class="eyebrow-1">@Model.HeroSection.Subtitle</div>
+        }
+        <h1>@Model.HeroSection.Title</h1>
 
-    <div class="hero-cta-row">
-      <a href="#sectors" class="btn btn-primary">استكشف خدماتنا
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-      </a>
-    </div>
-  </div>
+        @if (!string.IsNullOrEmpty(Model.HeroSection.CtaText) && !string.IsNullOrEmpty(Model.HeroSection.CtaLink))
+        {
+            <div class="hero-cta-row">
+              <a href="@Model.HeroSection.CtaLink" class="btn btn-primary">@Model.HeroSection.CtaText
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+              </a>
+            </div>
+        }
+      </div>
 
-</section>
+    </section>
+}
 <section class="section-sm bg-ink" style="padding-block:0;">
 
 </section>
 
-<section class="bg-mist">
-  <div class="container">
-    <div class="about-teaser">
-      <div class="about-teaser-content reveal">
-        <div class="eyebrow">ما نقوم به</div>
-        <h2>تنطلق همم الحياة من همة تسعى إلى تحويل الأفكار والرسائل والأهداف إلى تجارب حقيقية ذات أثر ملموس</h2>
-        <p>نجمع بين التفكير الاستراتيجي والإبداع والتنفيذ المنضبط؛ لنقدم تجارب مترابطة تضع الإنسان في جوهرها، وتنتقل بالفكرة من التصور إلى واقع يُعاش ويُتذكر.</p>
-        <p>ولا تنتهي قيمة التجربة بانتهاء تنفيذها، بل تمتد إلى ما تحققه من نتائج، وما تتركه من أثر يمكن قياسه وتطويره والبناء عليه.</p>
-      </div>
-      <div class="about-teaser-media reveal">
-        <div class="chairman-frame">
-          <img src="~/assets/chairman-dhafer-alshahrani.png" alt="ظافر الشهراني - رئيس مجلس الإدارة">
-        </div>
-        <div class="chairman-tag">
-          <strong>ظافر الشهراني</strong>
-          <span>رئيس مجلس الإدارة</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<section id="sectors">
-  <div class="container">
-    <div class="head-row reveal">
-      <h2>قطاعات الأعمال</h2>
-    </div>
-  </div>
-  <div class="container sectors-scroll-wrap">
-    <button type="button" class="sectors-arrow sectors-arrow--prev" data-dir="prev" aria-label="القطاعات السابقة">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 6l6 6-6 6"/></svg>
-    </button>
-    <div class="sectors-scroll reveal">
-
-      <div class="sector-card">
-        <div class="flip-inner">
-          <div class="flip-front">
-            <img class="sector-img" src="~/assets/sectors/s1.JPG" alt="الجهات الحكومية والهيئات" loading="lazy">
-            <div class="sector-front-overlay"></div>
-            <div class="sector-front-label">
-              <h3>الجهات الحكومية والهيئات</h3>
-            </div>
+@if (Model.AboutSection != null && Model.AboutSection.IsVisible)
+{
+    <section class="bg-mist">
+      <div class="container">
+        <div class="about-teaser">
+          <div class="about-teaser-content reveal">
+            @if (!string.IsNullOrEmpty(Model.AboutSection.Eyebrow))
+            {
+                <div class="eyebrow">@Model.AboutSection.Eyebrow</div>
+            }
+            <h2>@Model.AboutSection.Title</h2>
+            <p>@Model.AboutSection.Description</p>
+            @if (!string.IsNullOrEmpty(Model.AboutSection.AdditionalDescription))
+            {
+                <p>@Model.AboutSection.AdditionalDescription</p>
+            }
           </div>
-          <div class="flip-back">
-            <h3>الجهات الحكومية والهيئات</h3>
-            <p>نطور المبادرات والفعاليات والبرامج والمشروعات التي تدعم الأهداف المؤسسية والمجتمعية وتخدم المستفيدين ضمن تجربة واضحة ومنظمة تراعي الحوكمة وتنوع الجمهور وقابلية قياس النتائج.</p>
-          </div>
+          @if (!string.IsNullOrEmpty(Model.AboutSection.ChairmanImage))
+          {
+              <div class="about-teaser-media reveal">
+                <div class="chairman-frame">
+                  <img src="@Model.AboutSection.ChairmanImage" alt="@Model.AboutSection.ChairmanName - @Model.AboutSection.ChairmanTitle">
+                </div>
+                @if (!string.IsNullOrEmpty(Model.AboutSection.ChairmanName) || !string.IsNullOrEmpty(Model.AboutSection.ChairmanTitle))
+                {
+                    <div class="chairman-tag">
+                      @if (!string.IsNullOrEmpty(Model.AboutSection.ChairmanName))
+                      {
+                          <strong>@Model.AboutSection.ChairmanName</strong>
+                      }
+                      @if (!string.IsNullOrEmpty(Model.AboutSection.ChairmanTitle))
+                      {
+                          <span>@Model.AboutSection.ChairmanTitle</span>
+                      }
+                    </div>
+                }
+              </div>
+          }
         </div>
       </div>
+    </section>
+}
 
-      <div class="sector-card">
-        <div class="flip-inner">
-          <div class="flip-front">
-            <img class="sector-img" src="~/assets/sectors/s2.jpg" alt="القطاع الخاص والعلامات التجارية" loading="lazy">
-            <div class="sector-front-overlay"></div>
-            <div class="sector-front-label">
-              <h3>القطاع الخاص والعلامات التجارية</h3>
-            </div>
-          </div>
-          <div class="flip-back">
-            <h3>القطاع الخاص والعلامات التجارية</h3>
-            <p>نصمم تجارب تساعد الشركات والعلامات التجارية على ترجمة أهدافها ورسائلها إلى تفاعل حقيقي مع العملاء والموظفين والشركاء.</p>
-          </div>
+
+@if (Model.Sectors.Any())
+{
+    <section id="sectors">
+      <div class="container">
+        <div class="head-row reveal">
+          <h2>قطاعات الأعمال</h2>
         </div>
       </div>
+      <div class="container sectors-scroll-wrap">
+        <button type="button" class="sectors-arrow sectors-arrow--prev" data-dir="prev" aria-label="القطاعات السابقة">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 6l6 6-6 6"/></svg>
+        </button>
+        <div class="sectors-scroll reveal">
 
-      <div class="sector-card">
-        <div class="flip-inner">
-          <div class="flip-front">
-            <img class="sector-img" src="~/assets/sectors/s3.jpg" alt="القطاع غير الربحي" loading="lazy">
-            <div class="sector-front-overlay"></div>
-            <div class="sector-front-label">
-              <h3>القطاع غير الربحي</h3>
-            </div>
-          </div>
-          <div class="flip-back">
-            <h3>القطاع غير الربحي</h3>
-            <p>نساعد القطاعات غير الربحية على تحويل رسالتها وأهدافها المجتمعية إلى برامج ومبادرات وتجارب تصل للمستفيدين والداعمين والمتطوعين بوضوح، وتدعم المشاركة والاستفادة ضمن الموارد المتاحة.</p>
-          </div>
+          @foreach (var sector in Model.Sectors)
+          {
+              <div class="sector-card">
+                <div class="flip-inner">
+                  <div class="flip-front">
+                    @if (!string.IsNullOrEmpty(sector.Image))
+                    {
+                        <img class="sector-img" src="@sector.Image" alt="@sector.Title" loading="lazy">
+                    }
+                    <div class="sector-front-overlay"></div>
+                    <div class="sector-front-label">
+                      <h3>@sector.Title</h3>
+                    </div>
+                  </div>
+                  <div class="flip-back">
+                    <h3>@sector.Title</h3>
+                    <p>@sector.Description</p>
+                  </div>
+                </div>
+              </div>
+          }
         </div>
+        <button type="button" class="sectors-arrow sectors-arrow--next" data-dir="next" aria-label="القطاعات التالية">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 6l-6 6 6 6"/></svg>
+        </button>
       </div>
-
-      <div class="sector-card">
-        <div class="flip-inner">
-          <div class="flip-front">
-            <img class="sector-img" src="~/assets/sectors/s4.jpeg" alt="القطاع الترفيهي والثقافي" loading="lazy">
-            <div class="sector-front-overlay"></div>
-            <div class="sector-front-label">
-              <h3>القطاع الترفيهي والثقافي</h3>
-            </div>
-          </div>
-          <div class="flip-back">
-            <h3>القطاع الترفيهي والثقافي</h3>
-            <p>نطور فعاليات وتجارب تجمع بين المحتوى والإبداع والتفاعل، وتقدم للجمهور رحلة متماسكة تتناسب مع طبيعة المشروع وسياقه الثقافي والترفيهي.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="sector-card">
-        <div class="flip-inner">
-          <div class="flip-front">
-            <img class="sector-img" src="~/assets/sectors/s5.jpg" alt="القطاع السياحي والضيافة" loading="lazy">
-            <div class="sector-front-overlay"></div>
-            <div class="sector-front-label">
-              <h3>القطاع السياحي والضيافة</h3>
-            </div>
-          </div>
-          <div class="flip-back">
-            <h3>القطاع السياحي والضيافة</h3>
-            <p>نصمم تجارب الزوار والوجهات والبرامج السياحية بما يعزز وضوح الرحلة وجودة التفاعل، ويربط المكان بقصته وهويته وجمهوره المستهدف.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="sector-card">
-        <div class="flip-inner">
-          <div class="flip-front">
-            <img class="sector-img" src="~/assets/sectors/s6.jpg" alt="القطاع الرياضي" loading="lazy">
-            <div class="sector-front-overlay"></div>
-            <div class="sector-front-label">
-              <h3>القطاع الرياضي</h3>
-            </div>
-          </div>
-          <div class="flip-back">
-            <h3>القطاع الرياضي</h3>
-            <p>نطور الفعاليات والبرامج والتجارب الجماهيرية المصاحبة للأنشطة والبطولات الرياضية بما يدعم المشاركة ويعزز ارتباط الجمهور بالحدث أو النادي أو الجهة المنظمة.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="sector-card">
-        <div class="flip-inner">
-          <div class="flip-front">
-            <img class="sector-img" src="~/assets/sectors/s7.JPG" alt="قطاع التعليم وتنمية القدرات" loading="lazy">
-            <div class="sector-front-overlay"></div>
-            <div class="sector-front-label">
-              <h3>قطاع التعليم وتنمية القدرات</h3>
-            </div>
-          </div>
-          <div class="flip-back">
-            <h3>قطاع التعليم وتنمية القدرات</h3>
-            <p>نطور برامج وتجارب تعليمية وتدريبية تجمع بين المعرفة والتطبيق والمشاركة، وتحوّل المحتوى الترفيهي إلى رحلة تعلّم أكثر وضوحًا وتفاعلًا.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="sector-card">
-        <div class="flip-inner">
-          <div class="flip-front">
-            <img class="sector-img" src="~/assets/sectors/s8.jpg" alt="الرعاة والشركاء الاستراتيجيون" loading="lazy">
-            <div class="sector-front-overlay"></div>
-            <div class="sector-front-label">
-              <h3>الرعاة والشركاء الاستراتيجيون</h3>
-            </div>
-          </div>
-          <div class="flip-back">
-            <h3>الرعاة والشركاء الاستراتيجيون</h3>
-            <p>يمثل الرعاة والشركاء فئة ممتدة عبر مختلف القطاعات، وليست قطاعًا مستقلًا، وتعمل همم الحياة على تطوير فرص مشاركة وظهور وتفاعل ترتبط بأهداف الشراكة وطبيعة الجمهور، وتندمج داخل التجربة بصورة طبيعية.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="sector-card">
-        <div class="flip-inner">
-          <div class="flip-front">
-            <img class="sector-img" src="~/assets/sectors/s9.jpg" alt="قطاع الاستثمار" loading="lazy">
-            <div class="sector-front-overlay"></div>
-            <div class="sector-front-label">
-              <h3>قطاع الاستثمار</h3>
-            </div>
-          </div>
-          <div class="flip-back">
-            <h3>قطاع الاستثمار</h3>
-            <p>نطور الملتقيات والبرامج والتجارب التي تجمع رواد الأعمال والمستثمرين والجهات الداعمة، وتساعد على تحويل الأفكار والفرص إلى مسارات أوضح للتواصل والتقييم والبناء.</p>
-          </div>
-        </div>
-      </div>
-
-    </div>
-    <button type="button" class="sectors-arrow sectors-arrow--next" data-dir="next" aria-label="القطاعات التالية">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 6l-6 6 6 6"/></svg>
-    </button>
-  </div>
-</section>
+    </section>
+}
 
 <section class="bg-mist">
   <div class="container">

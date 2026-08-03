@@ -44,6 +44,8 @@ public partial class HimanAlhayahContext : DbContext
 
     public virtual DbSet<User> Users { get; set; }
 
+    public virtual DbSet<UserInvitation> UserInvitations { get; set; }
+
     public virtual DbSet<HeroSection> HeroSections { get; set; }
 
     public virtual DbSet<AboutSection> AboutSections { get; set; }
@@ -332,11 +334,15 @@ public partial class HimanAlhayahContext : DbContext
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
             entity.Property(e => e.Email).HasMaxLength(150);
+            entity.Property(e => e.FullName).HasMaxLength(100);
+            entity.Property(e => e.IsEmailVerified).HasDefaultValue(false);
             entity.Property(e => e.PasswordHash).HasMaxLength(255);
             entity.Property(e => e.UpdatedAt)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
             entity.Property(e => e.Username).HasMaxLength(100);
+            entity.Property(e => e.VerificationCode).HasMaxLength(255);
+            entity.Property(e => e.VerificationCodeExpires).HasColumnType("datetime");
 
             entity.HasMany(d => d.Roles).WithMany(p => p.Users)
                 .UsingEntity<Dictionary<string, object>>(
@@ -352,6 +358,23 @@ public partial class HimanAlhayahContext : DbContext
                         j.HasKey("UserId", "RoleId");
                         j.ToTable("UserRoles");
                     });
+        });
+
+        modelBuilder.Entity<UserInvitation>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__UserInvi__3214EC07A761B1C5");
+
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Email).HasMaxLength(150);
+            entity.Property(e => e.FullName).HasMaxLength(100);
+            entity.Property(e => e.RoleName).HasMaxLength(50);
+            entity.Property(e => e.Token).HasMaxLength(255);
+
+            entity.HasOne(d => d.CreatedByUser).WithMany()
+                .HasForeignKey(d => d.CreatedByUserId)
+                .HasConstraintName("FK_UserInvitations_Users");
         });
 
         modelBuilder.Entity<HeroSection>(entity =>
@@ -464,6 +487,7 @@ public partial class HimanAlhayahContext : DbContext
             entity.Property(e => e.Email).HasMaxLength(150);
             entity.Property(e => e.MapEmbedUrl).HasMaxLength(1000);
             entity.Property(e => e.Phone).HasMaxLength(50);
+            entity.Property(e => e.SortOrder).HasDefaultValue(0);
             entity.Property(e => e.UpdatedAt)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
