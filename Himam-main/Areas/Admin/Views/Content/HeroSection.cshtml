@@ -4,77 +4,119 @@
     Layout = "_ContentLayout";
 }
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">إدارة قسم Hero</h3>
+<div class="content-page">
+    <div class="content-header">
+        <div class="header-content">
+            <h1>إدارة قسم Hero</h1>
+            <p>تحرير محتوى القسم الرئيسي للموقع</p>
+        </div>
+        <div class="header-actions">
+            <a asp-action="Index" asp-controller="Dashboard" class="btn-action btn-secondary">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                عودة
+            </a>
+        </div>
+    </div>
+
+    <div class="content-body">
+        <form asp-action="HeroSection" method="post" class="edit-form">
+            @Html.AntiForgeryToken()
+            <input type="hidden" asp-for="Id" />
+
+            <div class="form-section">
+                <div class="section-title">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h6M9 9h1"/></svg>
+                    المحتوى النصي
                 </div>
-                <div class="card-body">
-                    <form asp-action="HeroSection" method="post">
-                        @Html.AntiForgeryToken()
-                        <input type="hidden" asp-for="Id" />
+                
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label asp-for="Title" class="form-label">العنوان الرئيسي</label>
+                        <input asp-for="Title" class="form-input" placeholder="أدخل العنوان الرئيسي" />
+                        <span asp-validation-for="Title" class="form-error"></span>
+                    </div>
 
-                        <div class="form-group mb-3">
-                            <label asp-for="Title" class="control-label">العنوان الرئيسي</label>
-                            <input asp-for="Title" class="form-control" />
-                            <span asp-validation-for="Title" class="text-danger"></span>
-                        </div>
-
-                        <div class="form-group mb-3">
-                            <label asp-for="Subtitle" class="control-label">العنوان الفرعي</label>
-                            <input asp-for="Subtitle" class="form-control" />
-                            <span asp-validation-for="Subtitle" class="text-danger"></span>
-                        </div>
-
-                        <div class="form-group mb-3">
-                            <label asp-for="CtaText" class="control-label">نص الزر</label>
-                            <input asp-for="CtaText" class="form-control" />
-                            <span asp-validation-for="CtaText" class="text-danger"></span>
-                        </div>
-
-                        <div class="form-group mb-3">
-                            <label asp-for="CtaLink" class="control-label">رابط الزر</label>
-                            <input asp-for="CtaLink" class="form-control" />
-                            <span asp-validation-for="CtaLink" class="text-danger"></span>
-                        </div>
-
-                        <div class="form-group mb-3">
-                            <label asp-for="YoutubeVideoId" class="control-label">معرف فيديو يوتيوب</label>
-                            <input asp-for="YoutubeVideoId" class="form-control" placeholder="مثال: c8bBHCEI9AE" />
-                            <span asp-validation-for="YoutubeVideoId" class="text-danger"></span>
-                            <small class="text-muted">المعرف موجود في رابط الفيديو بعد ?v=</small>
-                        </div>
-
-                        <div class="form-group mb-3">
-                            <div class="form-check">
-                                <input asp-for="IsVideoEnabled" class="form-check-input" />
-                                <label asp-for="IsVideoEnabled" class="form-check-label">تفعيل الفيديو</label>
-                            </div>
-                        </div>
-
-                        <div class="form-group mb-3">
-                            <div class="form-check">
-                                <input asp-for="IsVisible" class="form-check-input" />
-                                <label asp-for="IsVisible" class="form-check-label">إظهار القسم</label>
-                            </div>
-                        </div>
-
-                        <div class="form-group mb-3">
-                            <label asp-for="SortOrder" class="control-label">الترتيب</label>
-                            <input asp-for="SortOrder" class="form-control" type="number" />
-                            <span asp-validation-for="SortOrder" class="text-danger"></span>
-                        </div>
-
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary">حفظ التغييرات</button>
-                            <a asp-action="Index" asp-controller="Dashboard" class="btn btn-secondary">عودة</a>
-                        </div>
-                    </form>
+                    <div class="form-group">
+                        <label asp-for="Subtitle" class="form-label">العنوان الفرعي</label>
+                        <input asp-for="Subtitle" class="form-input" placeholder="أدخل العنوان الفرعي" />
+                        <span asp-validation-for="Subtitle" class="form-error"></span>
+                    </div>
                 </div>
             </div>
-        </div>
+
+            <div class="form-section">
+                <div class="section-title">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    زر الدعوة للإجراء
+                </div>
+                
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label asp-for="CtaText" class="form-label">نص الزر</label>
+                        <input asp-for="CtaText" class="form-input" placeholder="مثال: استكشف خدماتنا" />
+                        <span asp-validation-for="CtaText" class="form-error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="CtaLink" class="form-label">رابط الزر</label>
+                        <input asp-for="CtaLink" class="form-input" placeholder="#sectors" />
+                        <span asp-validation-for="CtaLink" class="form-error"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <div class="section-title">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-3.94-.77l-3.38 2.1-1.48-3.38a2.78 2.78 0 0 0-5.08 0l-1.48 3.38-3.38-2.1a2.78 2.78 0 0 0-3.94.77 2.83 2.83 0 0 0 .77 3.94l3.38 2.1-1.48 3.38a2.78 2.78 0 0 0 2.54 3.94 2.83 2.83 0 0 0 2.54-1.57l1.48-3.38 3.38 2.1a2.78 2.78 0 0 0 3.94-.77 2.83 2.83 0 0 0-.77-3.94l-3.38-2.1 1.48-3.38a2.78 2.78 0 0 0-2.54-3.94 2.83 2.83 0 0 0-2.54 1.57l-1.48 3.38-3.38-2.1a2.78 2.78 0 0 0-3.94.77 2.83 2.83 0 0 0 .77 3.94l3.38 2.1-1.48 3.38a2.78 2.78 0 0 0-2.54 3.94 2.83 2.83 0 0 0 2.54 1.57l1.48-3.38 3.38 2.1a2.78 2.78 0 0 0 3.94-.77 2.83 2.83 0 0 0-.77-3.94l-3.38-2.1 1.48-3.38a2.78 2.78 0 0 0 2.54-3.94 2.83 2.83 0 0 0-2.54-1.57l-1.48 3.38-3.38-2.1a2.78 2.78 0 0 0-3.94-.77 2.83 2.83 0 0 0 .77 3.94l3.38 2.1-1.48 3.38a2.78 2.78 0 0 0 2.54 3.94 2.83 2.83 0 0 0 2.54-1.57l1.48-3.38 3.38 2.1a2.78 2.78 0 0 0 3.94-.77 2.83 2.83 0 0 0-.77-3.94l-3.38-2.1 1.48-3.38a2.78 2.78 0 0 0-2.54-3.94 2.83 2.83 0 0 0-2.54 1.57l-1.48 3.38-3.38-2.1a2.78 2.78 0 0 0-3.94.77 2.83 2.83 0 0 0 .77 3.94l3.38 2.1-1.48 3.38a2.78 2.78 0 0 0-2.54 3.94 2.83 2.83 0 0 0 2.54 1.57l1.48-3.38 3.38 2.1a2.78 2.78 0 0 0 3.94-.77 2.83 2.83 0 0 0-.77-3.94l-3.38-2.1 1.48-3.38a2.78 2.78 0 0 0 2.54-3.94 2.83 2.83 0 0 0-2.54-1.57z"/></svg>
+                    إعدادات الفيديو
+                </div>
+                
+                <div class="form-group">
+                    <label asp-for="YoutubeVideoId" class="form-label">معرف فيديو يوتيوب</label>
+                    <input asp-for="YoutubeVideoId" class="form-input" placeholder="مثال: c8bBHCEI9AE" />
+                    <span asp-validation-for="YoutubeVideoId" class="form-error"></span>
+                    <small class="form-hint">المعرف موجود في رابط الفيديو بعد ?v=</small>
+                </div>
+
+                <div class="form-toggles">
+                    <div class="toggle-item">
+                        <label class="toggle-label">
+                            <input asp-for="IsVideoEnabled" type="checkbox" class="toggle-input" />
+                            <span class="toggle-slider"></span>
+                            <span class="toggle-text">تفعيل الفيديو</span>
+                        </label>
+                    </div>
+
+                    <div class="toggle-item">
+                        <label class="toggle-label">
+                            <input asp-for="IsVisible" type="checkbox" class="toggle-input" />
+                            <span class="toggle-slider"></span>
+                            <span class="toggle-text">إظهار القسم</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <div class="section-title">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                    إعدادات العرض
+                </div>
+                
+                <div class="form-group">
+                    <label asp-for="SortOrder" class="form-label">الترتيب</label>
+                    <input asp-for="SortOrder" class="form-input" type="number" placeholder="1" />
+                    <span asp-validation-for="SortOrder" class="form-error"></span>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn-action btn-primary">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                    حفظ التغييرات
+                </button>
+            </div>
+        </form>
     </div>
 </div>
 

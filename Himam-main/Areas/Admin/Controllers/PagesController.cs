@@ -56,22 +56,42 @@ public class PagesController : Controller
         {
             Title = input.Title,
             ContentAr = input.ContentAr,
+            ContentEn = input.ContentEn,
             MetaTitle = input.MetaTitle,
             MetaDescription = input.MetaDescription,
             Image = input.Image,
-            Status = input.Status
+            Status = input.Status,
+            SortOrder = input.SortOrder,
+            IsVisible = input.IsVisible
         }, userId.Value, User.CanPublish());
 
         return Json(new { success = true, page.Id, page.Status });
+    }
+
+    [HttpPatch("{slug}/toggle-visibility")]
+    public async Task<IActionResult> ToggleVisibility(string slug)
+    {
+        var page = await _content.GetPageBySlugAsync(slug);
+        if (page is null)
+            return NotFound();
+
+        page.IsVisible = !page.IsVisible;
+        page.UpdatedAt = DateTime.Now;
+        await _content.UpdatePageAsync(page);
+
+        return Json(new { success = true, isVisible = page.IsVisible });
     }
 
     public class PageInput
     {
         public string? Title { get; set; }
         public string? ContentAr { get; set; }
+        public string? ContentEn { get; set; }
         public string? MetaTitle { get; set; }
         public string? MetaDescription { get; set; }
         public string? Image { get; set; }
         public string? Status { get; set; }
+        public int? SortOrder { get; set; }
+        public bool IsVisible { get; set; } = true;
     }
 }

@@ -26,23 +26,17 @@ public class AuditLogService : IAuditLogService
     {
         httpContext ??= _httpContextAccessor.HttpContext;
 
-        var payload = new Dictionary<string, object?>
-        {
-            ["result"] = success ? "success" : "failure",
-            ["userAgent"] = httpContext?.Request.Headers.UserAgent.ToString(),
-            ["details"] = details,
-            ["timestamp"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
-        };
-
-        if (changes is not null)
-            payload["changes"] = changes;
-
         var entry = new AuditLog
         {
             Action = action,
-            UserId = userId ?? 0,
-            Details = JsonSerializer.Serialize(payload),
+            OperationType = ExtractOperationType(action),
+            UserId = userId,
+            UserName = await GetUserNameAsync(userId),
+            Details = details,
+            ChangesAfter = changes is not null ? JsonSerializer.Serialize(changes) : null,
+            Success = success,
             IpAddress = GetClientIp(httpContext),
+            UserAgent = httpContext?.Request.Headers.UserAgent.ToString(),
             CreatedAt = DateTime.Now
         };
 
@@ -61,57 +55,20 @@ public class AuditLogService : IAuditLogService
     {
         httpContext ??= _httpContextAccessor.HttpContext;
 
-        var payload = new Dictionary<string, object?>
-        {
-            ["entityName"] = entityName,
-            ["actionType"] = actionType,
-            ["entityId"] = entityId,
-            ["timestamp"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
-            ["userAgent"] = httpContext?.Request.Headers.UserAgent.ToString()
-        };
-
-        if (oldValues is not null)
-            payload["oldValues"] = oldValues;
-
-        if (newValues is not null)
-            payload["newValues"] = newValues;
-
-        // If update, calculate changed fields
-        if (actionType == "Update" && oldValues is not null && newValues is not null)
-        {
-            var changedFields = new Dictionary<string, object?>();
-            var oldJson = JsonSerializer.Serialize(oldValues);
-            var newJson = JsonSerializer.Serialize(newValues);
-            var oldDict = JsonSerializer.Deserialize<Dictionary<string, object?>>(oldJson);
-            var newDict = JsonSerializer.Deserialize<Dictionary<string, object?>>(newJson);
-
-            if (oldDict is not null && newDict is not null)
-            {
-                foreach (var key in newDict.Keys)
-                {
-                    if (!oldDict.ContainsKey(key) || 
-                        !Equals(oldDict[key], newDict[key]))
-                    {
-                        var changeData = new Dictionary<string, object?>
-                        {
-                            ["old"] = oldDict.ContainsKey(key) ? oldDict[key] : null,
-                            ["new"] = newDict[key]
-                        };
-                        changedFields[key] = JsonSerializer.Serialize(changeData);
-                    }
-                }
-            }
-
-            if (changedFields.Any())
-                payload["changedFields"] = changedFields;
-        }
-
         var entry = new AuditLog
         {
             Action = $"{entityName} - {actionType}",
-            UserId = userId ?? 0,
-            Details = JsonSerializer.Serialize(payload),
+            OperationType = actionType,
+            EntityType = entityName,
+            EntityId = entityId,
+            UserId = userId,
+            UserName = await GetUserNameAsync(userId),
+            Details = $"{actionType} {entityName}",
+            ChangesBefore = oldValues is not null ? JsonSerializer.Serialize(oldValues) : null,
+            ChangesAfter = newValues is not null ? JsonSerializer.Serialize(newValues) : null,
+            Success = true,
             IpAddress = GetClientIp(httpContext),
+            UserAgent = httpContext?.Request.Headers.UserAgent.ToString(),
             CreatedAt = DateTime.Now
         };
 
@@ -125,6 +82,49 @@ public class AuditLogService : IAuditLogService
         return await _context.AuditLogs
             .Where(a => a.CreatedAt < cutoff)
             .ExecuteDeleteAsync();
+    }
+
+    public async Task<int> ArchiveOlderThanAsync(int retentionDays)
+    {
+        var cutoff = DateTime.Now.AddDays(-retentionDays);
+        var logsToArchive = await _context.AuditLogs
+            .Where(a => a.CreatedAt < cutoff && !a.IsArchived)
+            .ToListAsync();
+
+        foreach (var log in logsToArchive)
+        {
+            log.IsArchived = true;
+            log.ArchivedAt = DateTime.Now;
+        }
+
+        await _context.SaveChangesAsync();
+        return logsToArchive.Count;
+    }
+
+    private static string? ExtractOperationType(string action)
+    {
+        if (action.Contains("Create", StringComparison.OrdinalIgnoreCase))
+            return "Create";
+        if (action.Contains("Update", StringComparison.OrdinalIgnoreCase))
+            return "Update";
+        if (action.Contains("Delete", StringComparison.OrdinalIgnoreCase))
+            return "Delete";
+        if (action.Contains("Login", StringComparison.OrdinalIgnoreCase))
+            return "Login";
+        if (action.Contains("Logout", StringComparison.OrdinalIgnoreCase))
+            return "Logout";
+        if (action.Contains("Publish", StringComparison.OrdinalIgnoreCase))
+            return "Publish";
+        return "General";
+    }
+
+    private async Task<string?> GetUserNameAsync(int? userId)
+    {
+        if (!userId.HasValue || userId.Value == 0)
+            return null;
+
+        var user = await _context.Users.FindAsync(userId.Value);
+        return user?.Username;
     }
 
     private static string? GetClientIp(HttpContext? httpContext)

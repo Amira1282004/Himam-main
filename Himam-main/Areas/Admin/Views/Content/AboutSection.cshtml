@@ -4,81 +4,121 @@
     Layout = "_ContentLayout";
 }
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">إدارة قسم About</h3>
+<div class="content-page">
+    <div class="content-header">
+        <div class="header-content">
+            <h1>إدارة قسم About</h1>
+            <p>تحرير محتوى قسم "من نحن"</p>
+        </div>
+        <div class="header-actions">
+            <a asp-action="Index" asp-controller="Dashboard" class="btn-action btn-secondary">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                عودة
+            </a>
+        </div>
+    </div>
+
+    <div class="content-body">
+        <form asp-action="AboutSection" method="post" class="edit-form">
+            @Html.AntiForgeryToken()
+            <input type="hidden" asp-for="Id" />
+
+            <div class="form-section">
+                <div class="section-title">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h6M9 9h1"/></svg>
+                    العناوين الرئيسية
                 </div>
-                <div class="card-body">
-                    <form asp-action="AboutSection" method="post">
-                        @Html.AntiForgeryToken()
-                        <input type="hidden" asp-for="Id" />
+                
+                <div class="form-group">
+                    <label asp-for="Eyebrow" class="form-label">العنوان العلوي</label>
+                    <input asp-for="Eyebrow" class="form-input" placeholder="مثال: ما نقوم به" />
+                    <span asp-validation-for="Eyebrow" class="form-error"></span>
+                </div>
 
-                        <div class="form-group mb-3">
-                            <label asp-for="Eyebrow" class="control-label">العنوان العلوي</label>
-                            <input asp-for="Eyebrow" class="form-control" />
-                            <span asp-validation-for="Eyebrow" class="text-danger"></span>
-                        </div>
-
-                        <div class="form-group mb-3">
-                            <label asp-for="Title" class="control-label">العنوان الرئيسي</label>
-                            <textarea asp-for="Title" class="form-control" rows="3"></textarea>
-                            <span asp-validation-for="Title" class="text-danger"></span>
-                        </div>
-
-                        <div class="form-group mb-3">
-                            <label asp-for="Description" class="control-label">الوصف</label>
-                            <textarea asp-for="Description" class="form-control" rows="4"></textarea>
-                            <span asp-validation-for="Description" class="text-danger"></span>
-                        </div>
-
-                        <div class="form-group mb-3">
-                            <label asp-for="AdditionalDescription" class="control-label">الوصف الإضافي</label>
-                            <textarea asp-for="AdditionalDescription" class="form-control" rows="4"></textarea>
-                            <span asp-validation-for="AdditionalDescription" class="text-danger"></span>
-                        </div>
-
-                        <div class="form-group mb-3">
-                            <label asp-for="ChairmanName" class="control-label">اسم الرئيس</label>
-                            <input asp-for="ChairmanName" class="form-control" />
-                            <span asp-validation-for="ChairmanName" class="text-danger"></span>
-                        </div>
-
-                        <div class="form-group mb-3">
-                            <label asp-for="ChairmanTitle" class="control-label">لقب الرئيس</label>
-                            <input asp-for="ChairmanTitle" class="form-control" />
-                            <span asp-validation-for="ChairmanTitle" class="text-danger"></span>
-                        </div>
-
-                        <div class="form-group mb-3">
-                            <label asp-for="ChairmanImage" class="control-label">صورة الرئيس</label>
-                            <input asp-for="ChairmanImage" class="form-control" />
-                            <span asp-validation-for="ChairmanImage" class="text-danger"></span>
-                        </div>
-
-                        <div class="form-group mb-3">
-                            <div class="form-check">
-                                <input asp-for="IsVisible" class="form-check-input" />
-                                <label asp-for="IsVisible" class="form-check-label">إظهار القسم</label>
-                            </div>
-                        </div>
-
-                        <div class="form-group mb-3">
-                            <label asp-for="SortOrder" class="control-label">الترتيب</label>
-                            <input asp-for="SortOrder" class="form-control" type="number" />
-                            <span asp-validation-for="SortOrder" class="text-danger"></span>
-                        </div>
-
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary">حفظ التغييرات</button>
-                            <a asp-action="Index" asp-controller="Dashboard" class="btn btn-secondary">عودة</a>
-                        </div>
-                    </form>
+                <div class="form-group">
+                    <label asp-for="Title" class="form-label">العنوان الرئيسي</label>
+                    <textarea asp-for="Title" class="form-input" rows="3" placeholder="أدخل العنوان الرئيسي"></textarea>
+                    <span asp-validation-for="Title" class="form-error"></span>
                 </div>
             </div>
-        </div>
+
+            <div class="form-section">
+                <div class="section-title">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                    الوصف والتفاصيل
+                </div>
+                
+                <div class="form-group">
+                    <label asp-for="Description" class="form-label">الوصف الرئيسي</label>
+                    <textarea asp-for="Description" class="form-input" rows="4" placeholder="أدخل الوصف الرئيسي للقسم"></textarea>
+                    <span asp-validation-for="Description" class="form-error"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="AdditionalDescription" class="form-label">الوصف الإضافي</label>
+                    <textarea asp-for="AdditionalDescription" class="form-input" rows="4" placeholder="أدخل وصف إضافي للقسم"></textarea>
+                    <span asp-validation-for="AdditionalDescription" class="form-error"></span>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <div class="section-title">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    معلومات الرئيس
+                </div>
+                
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label asp-for="ChairmanName" class="form-label">اسم الرئيس</label>
+                        <input asp-for="ChairmanName" class="form-input" placeholder="أدخل اسم الرئيس" />
+                        <span asp-validation-for="ChairmanName" class="form-error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="ChairmanTitle" class="form-label">لقب الرئيس</label>
+                        <input asp-for="ChairmanTitle" class="form-input" placeholder="مثال: رئيس مجلس الإدارة" />
+                        <span asp-validation-for="ChairmanTitle" class="form-error"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="ChairmanImage" class="form-label">رابط صورة الرئيس</label>
+                    <input asp-for="ChairmanImage" class="form-input" placeholder="/assets/chairman-image.png" />
+                    <span asp-validation-for="ChairmanImage" class="form-error"></span>
+                    <small class="form-hint">مسار الصورة يجب أن يبدأ بـ /</small>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <div class="section-title">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                    إعدادات العرض
+                </div>
+                
+                <div class="form-toggles">
+                    <div class="toggle-item">
+                        <label class="toggle-label">
+                            <input asp-for="IsVisible" type="checkbox" class="toggle-input" />
+                            <span class="toggle-slider"></span>
+                            <span class="toggle-text">إظهار القسم</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="SortOrder" class="form-label">الترتيب</label>
+                    <input asp-for="SortOrder" class="form-input" type="number" placeholder="1" />
+                    <span asp-validation-for="SortOrder" class="form-error"></span>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn-action btn-primary">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                    حفظ التغييرات
+                </button>
+            </div>
+        </form>
     </div>
 </div>
 

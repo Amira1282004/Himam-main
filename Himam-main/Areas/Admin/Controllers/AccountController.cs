@@ -1,6 +1,7 @@
 using System.Security.Claims;
 using Himam_main.Data;
 using Himam_main.Models.ViewModels;
+using Himam_main.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
@@ -13,10 +14,12 @@ namespace Himam_main.Areas.Admin.Controllers
     public class AccountController : Controller
     {
         private readonly HimanAlhayahContext _context;
+        private readonly BruteForceProtectionService _bruteForceProtection;
 
-        public AccountController(HimanAlhayahContext context)
+        public AccountController(HimanAlhayahContext context, BruteForceProtectionService bruteForceProtection)
         {
             _context = context;
+            _bruteForceProtection = bruteForceProtection;
         }
 
         [HttpGet]
@@ -32,16 +35,29 @@ namespace Himam_main.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(string loginEmail, string loginPassword, bool rememberMe = false)
         {
+            // Check for brute force
+            var identifier = $"{loginEmail}:{HttpContext.Connection.RemoteIpAddress}";
+            if (_bruteForceProtection.IsLockedOut(identifier))
+            {
+                var remainingMinutes = _bruteForceProtection.GetRemainingLockoutTime(identifier);
+                ModelState.AddModelError(string.Empty, $"تم قفل الحساب مؤقتاً. حاول مرة أخرى بعد {remainingMinutes} دقيقة");
+                return View();
+            }
+
             var user = await _context.Users
                 .Include(u => u.Roles)
                 .FirstOrDefaultAsync(u => u.Email == loginEmail);
 
             if (user == null || !BCrypt.Net.BCrypt.Verify(loginPassword, user.PasswordHash))
             {
+                _bruteForceProtection.RecordFailedAttempt(identifier);
                 ModelState.AddModelError(string.Empty, "البريد الإلكتروني أو كلمة المرور غير صحيحة");
                 return View();
             }
 
+            // Reset failed attempts on successful login
+            _bruteForceProtection.ResetFailedAttempts(identifier);
+            
             await SignInUserAsync(user, rememberMe);
             return RedirectToAction("Index", "Dashboard");
         }

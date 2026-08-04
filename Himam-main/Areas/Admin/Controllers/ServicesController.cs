@@ -48,6 +48,24 @@ public class ServicesController : Controller
         var ok = await _content.DeleteServiceCategoryAsync(id);
         return ok ? Json(new { success = true }) : NotFound();
     }
+
+    [HttpPatch("{id:int}/toggle-visibility")]
+    public async Task<IActionResult> ToggleVisibility(int id)
+    {
+        var userId = User.GetUserId();
+        if (userId is null)
+            return Unauthorized();
+
+        var item = await _content.GetServiceCategoryByIdAsync(id);
+        if (item is null)
+            return NotFound();
+
+        item.IsVisible = !item.IsVisible;
+        item.UpdatedAt = DateTime.Now;
+        await _content.UpdateServiceCategoryAsync(item);
+
+        return Json(new { success = true, isVisible = item.IsVisible });
+    }
 }
 
 [Area("Admin")]

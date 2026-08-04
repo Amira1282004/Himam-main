@@ -320,7 +320,7 @@ public static class DatabaseSeeder
             context.ServiceCategories.Add(new ServiceCategory
             {
                 Title = title,
-                Description = desc,
+                DescriptionAr = desc,
                 SortOrder = order,
                 CreatedAt = DateTime.Now,
                 UpdatedAt = DateTime.Now

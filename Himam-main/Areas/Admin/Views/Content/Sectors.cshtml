@@ -4,55 +4,81 @@
     Layout = "_ContentLayout";
 }
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <h3 class="card-title">إدارة القطاعات</h3>
-                    <a asp-action="CreateSector" class="btn btn-primary">إضافة قطاع جديد</a>
-                </div>
-                <div class="card-body">
-                    <table class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th>العنوان</th>
-                                <th>الصورة</th>
-                                <th>الترتيب</th>
-                                <th>الحالة</th>
-                                <th>الإجراءات</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var sector in Model)
-                            {
-                                <tr>
-                                    <td>@sector.Title</td>
-                                    <td>@sector.Image</td>
-                                    <td>@sector.SortOrder</td>
-                                    <td>
-                                        @if (sector.IsVisible)
-                                        {
-                                            <span class="badge bg-success">مرئي</span>
-                                        }
-                                        else
-                                        {
-                                            <span class="badge bg-danger">مخفي</span>
-                                        }
-                                    </td>
-                                    <td>
-                                        <a asp-action="EditSector" asp-route-id="@sector.Id" class="btn btn-sm btn-info">تعديل</a>
-                                        <form asp-action="DeleteSector" asp-route-id="@sector.Id" method="post" style="display:inline;">
-                                            @Html.AntiForgeryToken()
-                                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('هل أنت متأكد من الحذف؟')">حذف</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+<div class="content-page">
+    <div class="content-header">
+        <div class="header-content">
+            <h1>إدارة القطاعات</h1>
+            <p>إضافة وتعديل وحذف القطاعات المختلفة</p>
         </div>
+        <div class="header-actions">
+            <a asp-action="CreateSector" class="btn-action btn-primary">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                إضافة قطاع جديد
+            </a>
+        </div>
+    </div>
+
+    <div class="content-body">
+        @if (Model != null && Model.Count > 0)
+        {
+            <div class="items-grid">
+                @foreach (var sector in Model)
+                {
+                    <div class="item-card">
+                        <div class="item-image">
+                            @if (!string.IsNullOrEmpty(sector.Image))
+                            {
+                                <img src="@sector.Image" alt="@sector.Title" />
+                            }
+                            else
+                            {
+                                <div class="image-placeholder">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                                </div>
+                            }
+                        </div>
+                        <div class="item-content">
+                            <div class="item-header">
+                                <h3 class="item-title">@sector.Title</h3>
+                                <div class="item-status @(sector.IsVisible ? "status-visible" : "status-hidden")">
+                                    @(sector.IsVisible ? "مرئي" : "مخفي")
+                                </div>
+                            </div>
+                            <div class="item-meta">
+                                <span class="meta-item">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+                                    الترتيب: @sector.SortOrder
+                                </span>
+                            </div>
+                            <div class="item-actions">
+                                <a asp-action="EditSector" asp-route-id="@sector.Id" class="btn-sm btn-edit">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                                    تعديل
+                                </a>
+                                <form asp-action="DeleteSector" asp-route-id="@sector.Id" method="post" class="delete-form">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="btn-sm btn-delete" onclick="return confirm('هل أنت متأكد من حذف هذا القطاع؟')">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
+                                        حذف
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="empty-state">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+                <h3>لا توجد قطاعات</h3>
+                <p>ابدأ بإضافة قطاع جديد لعرضه في الموقع</p>
+                <a asp-action="CreateSector" class="btn-action btn-primary">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    إضافة قطاع جديد
+                </a>
+            </div>
+        }
     </div>
 </div>

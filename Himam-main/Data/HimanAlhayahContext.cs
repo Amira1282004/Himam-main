@@ -62,6 +62,14 @@ public partial class HimanAlhayahContext : DbContext
 
     public virtual DbSet<StatItem> StatItems { get; set; }
 
+    public virtual DbSet<Event> Events { get; set; }
+
+    public virtual DbSet<SeoSetting> SeoSettings { get; set; }
+
+    public virtual DbSet<CompanyInfo> CompanyInfos { get; set; }
+
+    public virtual DbSet<UrlRedirect> UrlRedirects { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.UseCollation("SQL_Latin1_General_CP1_CI_AS");
@@ -71,10 +79,17 @@ public partial class HimanAlhayahContext : DbContext
             entity.HasKey(e => e.Id).HasName("PK__AuditLog__3214EC072C9D1A93");
 
             entity.Property(e => e.Action).HasMaxLength(255);
+            entity.Property(e => e.OperationType).HasMaxLength(50);
+            entity.Property(e => e.EntityType).HasMaxLength(100);
+            entity.Property(e => e.UserName).HasMaxLength(255);
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
             entity.Property(e => e.IpAddress).HasMaxLength(50);
+            entity.Property(e => e.UserAgent).HasMaxLength(500);
+            entity.Property(e => e.ChangesBefore).HasColumnType("ntext");
+            entity.Property(e => e.ChangesAfter).HasColumnType("ntext");
+            entity.Property(e => e.ArchivedAt).HasColumnType("datetime");
 
             entity.HasOne(d => d.User).WithMany(p => p.AuditLogs)
                 .HasForeignKey(d => d.UserId)
@@ -179,12 +194,17 @@ public partial class HimanAlhayahContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("PK__News__3214EC07BBAC6C4B");
 
+            entity.Property(e => e.ContentAr).HasColumnType("ntext");
+            entity.Property(e => e.ContentEn).HasColumnType("ntext");
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
             entity.Property(e => e.Image).HasMaxLength(500);
+            entity.Property(e => e.IsFeatured).HasDefaultValue(false);
+            entity.Property(e => e.IsVisible).HasDefaultValue(true);
             entity.Property(e => e.MetaDescription).HasMaxLength(500);
             entity.Property(e => e.MetaTitle).HasMaxLength(255);
+            entity.Property(e => e.PublishedAt).HasColumnType("datetime");
             entity.Property(e => e.Slug).HasMaxLength(255);
             entity.Property(e => e.Status).HasMaxLength(50);
             entity.Property(e => e.Title).HasMaxLength(255);
@@ -201,10 +221,13 @@ public partial class HimanAlhayahContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("PK__Pages__3214EC07DF95702A");
 
+            entity.Property(e => e.ContentAr).HasColumnType("ntext");
+            entity.Property(e => e.ContentEn).HasColumnType("ntext");
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
             entity.Property(e => e.Image).HasMaxLength(500);
+            entity.Property(e => e.IsVisible).HasDefaultValue(true);
             entity.Property(e => e.MetaDescription).HasMaxLength(500);
             entity.Property(e => e.MetaTitle).HasMaxLength(255);
             entity.Property(e => e.Slug).HasMaxLength(255);
@@ -258,7 +281,11 @@ public partial class HimanAlhayahContext : DbContext
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
+            entity.Property(e => e.DescriptionAr).HasColumnType("ntext");
+            entity.Property(e => e.DescriptionEn).HasColumnType("ntext");
+            entity.Property(e => e.Icon).HasMaxLength(255);
             entity.Property(e => e.Image).HasMaxLength(500);
+            entity.Property(e => e.IsVisible).HasDefaultValue(true);
             entity.Property(e => e.Title).HasMaxLength(255);
             entity.Property(e => e.UpdatedAt)
                 .HasDefaultValueSql("(getdate())")
@@ -276,8 +303,10 @@ public partial class HimanAlhayahContext : DbContext
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
+            entity.Property(e => e.Description).HasMaxLength(500);
             entity.Property(e => e.GroupName).HasMaxLength(100);
             entity.Property(e => e.KeyName).HasMaxLength(100);
+            entity.Property(e => e.Type).HasMaxLength(50);
             entity.Property(e => e.UpdatedAt)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
@@ -535,6 +564,102 @@ public partial class HimanAlhayahContext : DbContext
             entity.HasOne(d => d.User).WithMany()
                 .HasForeignKey(d => d.UserId)
                 .HasConstraintName("FK_StatItems_Users");
+        });
+
+        modelBuilder.Entity<Event>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Events__3214EC07A4B9E2A8");
+
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.DescriptionAr).HasColumnType("ntext");
+            entity.Property(e => e.DescriptionEn).HasColumnType("ntext");
+            entity.Property(e => e.EventDate).HasColumnType("datetime");
+            entity.Property(e => e.Image).HasMaxLength(500);
+            entity.Property(e => e.Location).HasMaxLength(255);
+            entity.Property(e => e.MetaDescription).HasMaxLength(500);
+            entity.Property(e => e.MetaTitle).HasMaxLength(255);
+            entity.Property(e => e.Slug).HasMaxLength(255);
+            entity.Property(e => e.Status).HasMaxLength(50);
+            entity.Property(e => e.Title).HasMaxLength(255);
+            entity.Property(e => e.UpdatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+
+            entity.HasOne(d => d.User).WithMany()
+                .HasForeignKey(d => d.UserId)
+                .HasConstraintName("FK_Events_Users");
+        });
+
+        modelBuilder.Entity<SeoSetting>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__SeoSettings__3214EC07AF4E4F6E");
+
+            entity.Property(e => e.CanonicalUrl).HasMaxLength(500);
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.MetaDescription).HasMaxLength(500);
+            entity.Property(e => e.MetaKeywords).HasMaxLength(500);
+            entity.Property(e => e.MetaTitle).HasMaxLength(255);
+            entity.Property(e => e.OgDescription).HasMaxLength(500);
+            entity.Property(e => e.OgImage).HasMaxLength(500);
+            entity.Property(e => e.OgTitle).HasMaxLength(255);
+            entity.Property(e => e.PageName).HasMaxLength(255);
+            entity.Property(e => e.UpdatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+
+            entity.HasOne(d => d.User).WithMany()
+                .HasForeignKey(d => d.UserId)
+                .HasConstraintName("FK_SeoSettings_Users");
+        });
+
+        modelBuilder.Entity<CompanyInfo>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__CompanyInfos__3214EC07B39B36A1");
+
+            entity.Property(e => e.Address).HasMaxLength(500);
+            entity.Property(e => e.CommercialRegister).HasMaxLength(100);
+            entity.Property(e => e.CompanyName).HasMaxLength(255);
+            entity.Property(e => e.CompanyNameEn).HasMaxLength(255);
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Description).HasColumnType("ntext");
+            entity.Property(e => e.DescriptionEn).HasColumnType("ntext");
+            entity.Property(e => e.Email).HasMaxLength(150);
+            entity.Property(e => e.Favicon).HasMaxLength(500);
+            entity.Property(e => e.Logo).HasMaxLength(500);
+            entity.Property(e => e.Phone).HasMaxLength(50);
+            entity.Property(e => e.Tagline).HasMaxLength(255);
+            entity.Property(e => e.TaglineEn).HasMaxLength(255);
+            entity.Property(e => e.TaxNumber).HasMaxLength(100);
+            entity.Property(e => e.UpdatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Website).HasMaxLength(255);
+
+            entity.HasOne(d => d.User).WithMany()
+                .HasForeignKey(d => d.UserId)
+                .HasConstraintName("FK_CompanyInfos_Users");
+        });
+
+        modelBuilder.Entity<UrlRedirect>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__UrlRedirects__3214EC07C4E8E5A1");
+
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.ExpiredAt).HasColumnType("datetime");
+            entity.Property(e => e.NewUrl).HasMaxLength(500);
+            entity.Property(e => e.OldUrl).HasMaxLength(500);
+
+            entity.HasOne(d => d.User).WithMany()
+                .HasForeignKey(d => d.UserId)
+                .HasConstraintName("FK_UrlRedirects_Users");
         });
 
         OnModelCreatingPartial(modelBuilder);

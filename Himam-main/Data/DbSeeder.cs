@@ -592,5 +592,122 @@ public static class DbSeeder
             context.StatItems.AddRange(stats);
             await context.SaveChangesAsync();
         }
+
+        // Seed CompanyInfo
+        if (!await context.CompanyInfos.AnyAsync())
+        {
+            var user = await context.Users.FirstAsync(u => u.Id == 1);
+            context.CompanyInfos.Add(new CompanyInfo
+            {
+                CompanyName = "همم الحياة",
+                CompanyNameEn = "Himam Alhayah",
+                Tagline = "نصنع تجارب ترفيهية لأن جودة الحياة حق للجميع",
+                TaglineEn = "Creating entertainment experiences because quality of life is everyone's right",
+                Description = "همم الحياة هي شركة رائدة في صناعة الفعاليات وتطوير التجارب الترفيهية في المملكة العربية السعودية",
+                DescriptionEn = "Himam Alhayah is a leading company in event production and entertainment experience development in Saudi Arabia",
+                Logo = "/assets/logo-stacked-trim.png",
+                Favicon = "/favicon.ico",
+                Address = "الرياض، المملكة العربية السعودية",
+                Phone = "+966 XX XXX XXXX",
+                Email = "info@himamalhayah.com",
+                Website = "https://himamalhayah.com",
+                CommercialRegister = "XXXXXXXXX",
+                TaxNumber = "XXXXXXXXXXXXXXXX",
+                CreatedAt = DateTime.Now,
+                UpdatedAt = DateTime.Now,
+                UserId = user.Id
+            });
+            await context.SaveChangesAsync();
+        }
+
+        // Seed SeoSettings
+        if (!await context.SeoSettings.AnyAsync())
+        {
+            var user = await context.Users.FirstAsync(u => u.Id == 1);
+            var seoSettings = new[]
+            {
+                new SeoSetting
+                {
+                    PageName = "Home",
+                    MetaTitle = "همم الحياة | صناعة الفعاليات وتطوير التجارب",
+                    MetaDescription = "همم الحياة - شركة رائدة في صناعة الفعاليات وتطوير التجارب الترفيهية في المملكة العربية السعودية",
+                    MetaKeywords = "فعاليات، ترفيه، تجارب، المملكة العربية السعودية، همم الحياة",
+                    CanonicalUrl = "https://himamalhayah.com",
+                    OgTitle = "همم الحياة | صناعة الفعاليات وتطوير التجارب",
+                    OgDescription = "همم الحياة - شركة رائدة في صناعة الفعاليات وتطوير التجارب الترفيهية",
+                    OgImage = "/assets/og-image.jpg",
+                    IsEnabled = true,
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now,
+                    UserId = user.Id
+                },
+                new SeoSetting
+                {
+                    PageName = "About",
+                    MetaTitle = "من نحن | همم الحياة",
+                    MetaDescription = "تعرف على همم الحياة - رؤيتنا ورسالتنا وقيمنا في صناعة الفعاليات وتطوير التجارب",
+                    MetaKeywords = "من نحن، عن همم الحياة، رؤية، رسالة، قيم",
+                    CanonicalUrl = "https://himamalhayah.com/about",
+                    OgTitle = "من نحن | همم الحياة",
+                    OgDescription = "تعرف على همم الحياة - رؤيتنا ورسالتنا وقيمنا",
+                    OgImage = "/assets/og-about.jpg",
+                    IsEnabled = true,
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now,
+                    UserId = user.Id
+                }
+            };
+            context.SeoSettings.AddRange(seoSettings);
+            await context.SaveChangesAsync();
+        }
+
+        // Seed Events
+        if (!await context.Events.AnyAsync())
+        {
+            var user = await context.Users.FirstAsync(u => u.Id == 1);
+            var events = new[]
+            {
+                new Event
+                {
+                    Title = "معرض الرياض للفعاليات 2024",
+                    Slug = "riyadh-events-exhibition-2024",
+                    DescriptionAr = "معرض الرياض للفعاليات هو أكبر تجمع للمختصين في صناعة الفعاليات والترفيه في المنطقة",
+                    DescriptionEn = "Riyadh Events Exhibition is the largest gathering of event and entertainment specialists in the region",
+                    Image = "/assets/events/riyadh-exhibition.jpg",
+                    EventDate = DateTime.Now.AddDays(30),
+                    Location = "مركز الرياض الدولي للمؤتمرات والمعارض",
+                    MetaTitle = "معرض الرياض للفعاليات 2024 | همم الحياة",
+                    MetaDescription = "انضم إلينا في معرض الرياض للفعاليات 2024 - أكبر تجمع للمختصين في صناعة الفعاليات",
+                    Status = "Published",
+                    IsFeatured = true,
+                    SortOrder = 1,
+                    IsVisible = true,
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now,
+                    UserId = user.Id
+                },
+                new Event
+                {
+                    Title = "مؤتمر مستقبل الترفيه",
+                    Slug = "future-entertainment-conference",
+                    DescriptionAr = "مؤتمر يركز على مستقبل صناعة الترفيه في المملكة العربية السعودية والمنطقة",
+                    DescriptionEn = "A conference focusing on the future of the entertainment industry in Saudi Arabia and the region",
+                    Image = "/assets/events/entertainment-conference.jpg",
+                    EventDate = DateTime.Now.AddDays(60),
+                    Location = "فندق الريتز كارلتون، الرياض",
+                    MetaTitle = "مؤتمر مستقبل الترفيه | همم الحياة",
+                    MetaDescription = "مؤتمر يركز على مستقبل صناعة الترفيه في المملكة العربية السعودية",
+                    Status = "Published",
+                    IsFeatured = false,
+                    SortOrder = 2,
+                    IsVisible = true,
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now,
+                    UserId = user.Id
+                }
+            };
+            context.Events.AddRange(events);
+            await context.SaveChangesAsync();
+        }
     }
 }

@@ -69,7 +69,7 @@ public class SeoController : Controller
 
             urlset.Add(new XElement(ns + "url",
                 new XElement(ns + "loc", $"{baseUrl}/User/Home/NewsSingle/{item.Slug}"),
-                new XElement(ns + "lastmod", (item.UpdatedAt ?? DateTime.Now).ToString("yyyy-MM-dd")),
+                new XElement(ns + "lastmod", item.UpdatedAt.ToString("yyyy-MM-dd")),
                 new XElement(ns + "changefreq", "weekly"),
                 new XElement(ns + "priority", "0.7")));
         }

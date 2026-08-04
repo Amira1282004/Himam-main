@@ -10,15 +10,19 @@ public interface IContentService
     Task<IReadOnlyList<Page>> GetPagesAsync();
     Task<Page?> GetPageBySlugAsync(string slug, bool publishedOnly = false);
     Task<Page> SavePageAsync(string slug, Page input, int userId, bool canPublish);
+    Task UpdatePageAsync(Page page);
     Task<IReadOnlyList<News>> GetNewsAsync(string? status = null);
     Task<News?> GetNewsByIdAsync(int id);
     Task<News> SaveNewsAsync(News input, int userId, bool canPublish, int? id = null);
+    Task UpdateNewsAsync(News news);
     Task<bool> DeleteNewsAsync(int id, int userId);
     Task<IReadOnlyList<Setting>> GetSettingsAsync();
     Task SaveSettingsAsync(Dictionary<string, string> values);
     Task<IReadOnlyList<ServiceCategory>> GetServiceCategoriesAsync();
+    Task<ServiceCategory?> GetServiceCategoryByIdAsync(int id);
     Task<ServiceCategory> SaveServiceCategoryAsync(ServiceCategory input, int? id = null);
     Task<bool> DeleteServiceCategoryAsync(int id);
+    Task UpdateServiceCategoryAsync(ServiceCategory category);
 }
 
 public class ContentService : IContentService
@@ -52,9 +56,12 @@ public class ContentService : IContentService
 
         page.Title = input.Title;
         page.ContentAr = input.ContentAr;
+        page.ContentEn = input.ContentEn;
         page.MetaTitle = input.MetaTitle;
         page.MetaDescription = input.MetaDescription;
         page.Image = input.Image;
+        page.SortOrder = input.SortOrder;
+        page.IsVisible = input.IsVisible;
         page.UserId = userId;
         page.UpdatedAt = DateTime.Now;
 
@@ -80,16 +87,28 @@ public class ContentService : IContentService
         return page;
     }
 
+    public async Task UpdatePageAsync(Page page)
+    {
+        _context.Pages.Update(page);
+        await _context.SaveChangesAsync();
+    }
+
     public async Task<IReadOnlyList<News>> GetNewsAsync(string? status = null)
     {
         var query = _context.News.AsQueryable();
         if (!string.IsNullOrWhiteSpace(status))
             query = query.Where(n => n.Status == status);
-        return await query.OrderByDescending(n => n.UpdatedAt ?? n.CreatedAt).ToListAsync();
+        return await query.OrderByDescending(n => n.UpdatedAt).ToListAsync();
     }
 
     public async Task<News?> GetNewsByIdAsync(int id)
         => await _context.News.FindAsync(id);
+
+    public async Task UpdateNewsAsync(News news)
+    {
+        _context.News.Update(news);
+        await _context.SaveChangesAsync();
+    }
 
     public async Task<News> SaveNewsAsync(News input, int userId, bool canPublish, int? id = null)
     {
@@ -117,6 +136,10 @@ public class ContentService : IContentService
         news.Image = input.Image;
         news.MetaTitle = input.MetaTitle;
         news.MetaDescription = input.MetaDescription;
+        news.IsFeatured = input.IsFeatured;
+        news.PublishedAt = input.PublishedAt;
+        news.SortOrder = input.SortOrder;
+        news.IsVisible = input.IsVisible;
         news.UserId = userId;
         news.UpdatedAt = DateTime.Now;
 
@@ -216,12 +239,24 @@ public class ContentService : IContentService
         }
 
         item.Title = input.Title;
-        item.Description = input.Description;
+        item.DescriptionAr = input.DescriptionAr;
+        item.DescriptionEn = input.DescriptionEn;
+        item.Icon = input.Icon;
+        item.IsVisible = input.IsVisible;
         item.SortOrder = input.SortOrder ?? 0;
         item.UpdatedAt = DateTime.Now;
 
         await _context.SaveChangesAsync();
         return item;
+    }
+
+    public async Task<ServiceCategory?> GetServiceCategoryByIdAsync(int id)
+        => await _context.ServiceCategories.FindAsync(id);
+
+    public async Task UpdateServiceCategoryAsync(ServiceCategory category)
+    {
+        _context.ServiceCategories.Update(category);
+        await _context.SaveChangesAsync();
     }
 
     public async Task<bool> DeleteServiceCategoryAsync(int id)
@@ -241,16 +276,4 @@ public class ContentService : IContentService
         slug = System.Text.RegularExpressions.Regex.Replace(slug, @"[\s_-]+", "-");
         return slug.Trim('-');
     }
-}
-
-public static class CurrentUserExtensions
-{
-    public static int? GetUserId(this ClaimsPrincipal user)
-    {
-        var claim = user.FindFirstValue(ClaimTypes.NameIdentifier);
-        return int.TryParse(claim, out var id) ? id : null;
-    }
-
-    public static bool CanPublish(this ClaimsPrincipal user)
-        => user.IsInRole("Super Admin") || user.IsInRole("Site Manager");
 }

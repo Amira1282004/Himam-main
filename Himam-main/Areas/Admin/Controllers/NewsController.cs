@@ -78,6 +78,34 @@ public class NewsController : Controller
         return ok ? Json(new { success = true }) : NotFound();
     }
 
+    [HttpPatch("{id:int}/toggle-visibility")]
+    public async Task<IActionResult> ToggleVisibility(int id)
+    {
+        var news = await _content.GetNewsByIdAsync(id);
+        if (news is null)
+            return NotFound();
+
+        news.IsVisible = !news.IsVisible;
+        news.UpdatedAt = DateTime.Now;
+        await _content.UpdateNewsAsync(news);
+
+        return Json(new { success = true, isVisible = news.IsVisible });
+    }
+
+    [HttpPatch("{id:int}/toggle-featured")]
+    public async Task<IActionResult> ToggleFeatured(int id)
+    {
+        var news = await _content.GetNewsByIdAsync(id);
+        if (news is null)
+            return NotFound();
+
+        news.IsFeatured = !news.IsFeatured;
+        news.UpdatedAt = DateTime.Now;
+        await _content.UpdateNewsAsync(news);
+
+        return Json(new { success = true, isFeatured = news.IsFeatured });
+    }
+
     private static News MapInput(NewsInput input) => new()
     {
         Title = input.Title,
@@ -87,7 +115,11 @@ public class NewsController : Controller
         Image = input.Image,
         MetaTitle = input.MetaTitle,
         MetaDescription = input.MetaDescription,
-        Status = input.Status
+        Status = input.Status,
+        IsFeatured = input.IsFeatured,
+        PublishedAt = input.PublishedAt,
+        SortOrder = input.SortOrder,
+        IsVisible = input.IsVisible
     };
 
     public class NewsInput
@@ -100,5 +132,9 @@ public class NewsController : Controller
         public string? MetaTitle { get; set; }
         public string? MetaDescription { get; set; }
         public string? Status { get; set; }
+        public bool IsFeatured { get; set; }
+        public DateTime? PublishedAt { get; set; }
+        public int? SortOrder { get; set; }
+        public bool IsVisible { get; set; } = true;
     }
 }

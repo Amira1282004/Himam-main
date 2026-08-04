@@ -7,13 +7,12 @@ public partial class Setting
 {
     public int Id { get; set; }
 
-    public string? KeyName { get; set; }
+    public string KeyName { get; set; } = string.Empty;
+    public string Value { get; set; } = string.Empty;
+    public string GroupName { get; set; } = string.Empty;
+    public string Description { get; set; } = string.Empty;
+    public string Type { get; set; } = "text";
 
-    public string? Value { get; set; }
-
-    public string? GroupName { get; set; }
-
-    public DateTime? CreatedAt { get; set; }
-
-    public DateTime? UpdatedAt { get; set; }
+    public DateTime CreatedAt { get; set; } = DateTime.Now;
+    public DateTime UpdatedAt { get; set; } = DateTime.Now;
 }
